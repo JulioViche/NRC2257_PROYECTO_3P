@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRC2257_PROYECTO_3P", "NRC2257_PROYECTO_3P\NRC2257_PROYECTO_3P.csproj", "{5AC1FAF3-7209-4F85-B4F8-08C3AE39DB67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLayer", "EntityLayer\EntityLayer.csproj", "{68D62D07-1DE5-4BCC-B6F0-826160A3AA36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5AC1FAF3-7209-4F85-B4F8-08C3AE39DB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AC1FAF3-7209-4F85-B4F8-08C3AE39DB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AC1FAF3-7209-4F85-B4F8-08C3AE39DB67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D62D07-1DE5-4BCC-B6F0-826160A3AA36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D62D07-1DE5-4BCC-B6F0-826160A3AA36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D62D07-1DE5-4BCC-B6F0-826160A3AA36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D62D07-1DE5-4BCC-B6F0-826160A3AA36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
