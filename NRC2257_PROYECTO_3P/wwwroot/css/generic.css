@@ -1,0 +1,7 @@
+﻿#datatable tr i {
+    color: #7775;
+}
+
+#datatable tr:hover i {
+    color: inherit;
+}
