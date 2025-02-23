@@ -13,6 +13,11 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return View();
         }
 
+        public IActionResult ViewCreate()
+        {
+            return View();
+        }
+
         public List<ClienteCLS> Get()
         {
             ClienteBL clienteBL = new ClienteBL();

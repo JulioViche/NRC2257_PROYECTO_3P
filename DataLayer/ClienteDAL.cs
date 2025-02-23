@@ -41,9 +41,9 @@ namespace DataLayer
         {
             List<ClienteCLS> list = null;
 
-            db.ExecuteQuery("SELECT * FROM Clientes", (cmd) =>
+            db.ExecuteQuery("spGetClientes", (cmd) =>
             {
-                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 list = Read(cmd.ExecuteReader());
             });
 

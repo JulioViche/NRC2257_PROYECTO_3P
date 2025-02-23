@@ -55,7 +55,6 @@ function createTable(config, form) {
         fetchGet(config.url, 'json', res => table.innerHTML = generateTableContent(config, res));
     if (config.method === 'post')
         fetchPost(config.url, 'json', form, res => table.innerHTML = generateTableContent(config, res));
-
 }
 
 function generateTableContent(config, res) {

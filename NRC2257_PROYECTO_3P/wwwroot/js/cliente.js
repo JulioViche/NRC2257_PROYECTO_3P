@@ -18,17 +18,17 @@ async function renderTable() {
         //let form = new FormData(document.getElementById('search-form'));
         //console.log(form);
         //config.url = 'Cliente/Filter';
+        // Cliente/Create
         //config.method = 'post';
         //createTable(config, form);
     }
 }
 
 function search() {
+    resetForm();
     renderTable();
-    clear();
 }
 
-function clear() {
+function resetForm() {
     document.getElementById('search-form').reset();
-    setTimeout(renderTable(), 0);
 }
