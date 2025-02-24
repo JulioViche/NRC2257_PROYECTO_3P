@@ -11,5 +11,13 @@ namespace BusinessLayer
         {
             return empleadoDAL.Get();
         }
+
+        public List<EmpleadoCLS> Filter(string n)
+        {
+            EmpleadoDAL obj = new EmpleadoDAL();
+            return obj.Filter(n);
+
+        }
+       
     }
 }

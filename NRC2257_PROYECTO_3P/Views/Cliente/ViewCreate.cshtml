@@ -5,3 +5,33 @@
 
 <h1>Crear Cliente</h1>
 
+<fieldset class="row mt-3">
+    <form id="search-form" method="post" class="col-md-9 col-12 row">
+        <div class="col-3 mb-2">
+            <input id="" class="form-control" name="Nombre" type="text" placeholder="Nombre">
+        </div>
+        <div class="col-9 mb-2">
+            <input id="" class="form-control" name="Apellido" type="text" placeholder="Apellido">
+        </div>
+        <div class="col-3 mb-2">
+            <input id="" class="form-control" name="Telefono" type="text" placeholder="Teléfono">
+        </div>
+        <div class="col-3 mb-2">
+            <input id="email-input" class="form-control" name="Email" type="text" placeholder="Email">
+        </div>
+    </form>
+    <div class="col row">
+        <div class="col-6 mb-2">
+            <button class="btn btn-primary w-100" onclick="">Buscar</button>
+        </div>
+        <div class="col-6 mb-2">
+            <button class="btn btn-danger w-100" onclick="resetForm()">Limpiar</button>
+        </div>
+    </div>
+</fieldset>
+
+<hr>
+
+<div id="datatable-container" class="d-flex justify-content-center w-100"></div>
+
+<script src="~/js/cliente.js"></script>

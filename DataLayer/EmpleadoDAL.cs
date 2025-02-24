@@ -51,5 +51,19 @@ namespace DataLayer
 
             return list;
         }
+
+        public List<EmpleadoCLS> Filter(string n)
+        {
+            List<EmpleadoCLS> list = new();
+
+            db.ExecuteQuery("spFiltrarEmpleado", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nombre", n); 
+                list = Read(cmd.ExecuteReader());
+            });
+
+            return list;
+        }
     }
 }

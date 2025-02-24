@@ -17,5 +17,11 @@ namespace NRC2257_PROYECTO_3P.Controllers
         {
             return empleadoBL.Get();
         }
+         
+        public List<EmpleadoCLS> Filter(string n)
+        {
+            EmpleadoBL obj = new EmpleadoBL();
+            return obj.Filter(n);
+        }
     }
 }

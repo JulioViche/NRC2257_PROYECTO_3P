@@ -1,17 +1,17 @@
 ﻿
 @{
-    ViewData["Title"] = "Clientes";
+    ViewData["Title"] = "Index Empleado";
 }
 
-<h1>Buscar Clientes</h1>
+<h1>Búsqueda de Empleados</h1>
 
 <fieldset class="row mt-3">
     <form id="search-form" method="post" class="col-md-9 col-12 row">
         <div class="col-3 mb-2">
-            <input id="email-input" class="form-control" name="Ic" type="text" placeholder="Email">
+            <input id="email-input" class="form-control" name="email" type="text" placeholder="Email">
         </div>
         <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="Names" type="text" placeholder="Nombres y apellidos">
+            <input id="name-input" class="form-control" name="nombre" type="text" placeholder="Nombre y apellido">
         </div>
     </form>
     <div class="col row">
@@ -28,4 +28,4 @@
 
 <div id="datatable-container" class="d-flex justify-content-center w-100"></div>
 
-<script src="~/js/cliente.js"></script>
+<script src="~/js/empleado.js"></script>

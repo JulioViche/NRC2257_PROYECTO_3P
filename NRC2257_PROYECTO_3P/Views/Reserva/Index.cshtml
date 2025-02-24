@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Búsqueda de Reservas</h1>
+
+<div class="col-3 mb-2">
+    <input id="email-input" class="form-control" name="cliente" type="text" placeholder="Cliente">
+</div>
+<div class="col-9 mb-2">
+    <input id="name-input" class="form-control" name="vehiculo" type="text" placeholder="Vehículo">
+</div>
+<div class="col-9 mb-2">
+    <input id="name-input" class="form-control" name="fechainicio" type="text" placeholder="Fecha inicio">
+</div>
+<div class="col-9 mb-2">
+    <input id="name-input" class="form-control" name="fechafin" type="text" placeholder="Fecha Fin">
+</div>
+<div class="col-9 mb-2">
+    <input id="name-input" class="form-control" name="estado" type="text" placeholder="Estado">
+</div>
+
+<hr>
+
+<div id="datatable-container" class="d-flex justify-content-center w-100"></div>
+
+<script src="~/js/reserva.js"></script>
