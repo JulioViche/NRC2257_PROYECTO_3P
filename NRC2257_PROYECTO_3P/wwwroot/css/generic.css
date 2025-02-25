@@ -5,3 +5,19 @@
 #datatable tr:hover i {
     color: inherit;
 }
+
+#datatable tr.create td {
+    border: none;
+}
+
+#datatable tr.create:hover td {
+    border: inherit;
+}
+
+#datatable tr.create i {
+    color: transparent;
+}
+
+#datatable tr.create:hover i {
+    color: inherit;
+}

@@ -3,6 +3,48 @@
     ViewData["Title"] = "Empleados";
 }
 
+<div id="update-modal" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Editar empleado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form" method="post" class="row">
+                    <div class="col-2 mb-2">
+                        <label class="col-form-label mb-0">Id:</label>
+                        <input id="modal-id-input" class="form-control" type="text" placeholder="?" contenteditable="false" required readonly>
+                    </div>
+                    <div class="col-10 mb-2">
+                        <label class="col-form-label mb-0">Email:</label>
+                        <input id="modal-email-input" class="form-control" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Nombre:</label>
+                        <input id="modal-nombre-input" class="form-control" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Apellido:</label>
+                        <input id="modal-apellido-input" class="form-control" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Cargo:</label>
+                        <input id="modal-cargo-input" class="form-control" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Teléfono:</label>
+                        <input id="modal-telefono-input" class="form-control" type="text" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary w-100" type="sumbit" form="modal-form" onclick="resetForm()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h1>Búsqueda de Empleados</h1>
 
 <fieldset class="row mt-3">
@@ -20,6 +62,13 @@
 
 <hr>
 
-<div id="datatable-container" class="d-flex justify-content-center w-100"></div>
+<div class="card w-auto d">
+    <div class="card-header">
+        Empleados
+    </div>
+    <div id="datatable-container" class="card-body d-flex justify-content-center w-100 p-0"></div>
+</div>
+
+@* <div id="datatable-container" class="d-flex justify-content-center w-100"></div> *@
 
 <script src="~/js/empleado.js"></script>
