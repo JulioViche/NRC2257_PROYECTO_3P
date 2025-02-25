@@ -5,17 +5,13 @@ namespace DataLayer
 {
     public class ReservaDAL
     {
-        private DBConnection db = new DBConnection();
-
-        public List<ReservaCLS> Read(SqlDataReader reader)
+        private static List<ReservaCLS> Leer(SqlDataReader reader)
         {
-            List<ReservaCLS> list = null;
-
-            if(reader != null)
+            List<ReservaCLS> lista = null;
+            if (reader != null)
             {
-                list = new List<ReservaCLS>();
+                lista = new List<ReservaCLS>();
                 ReservaCLS reserva;
-
                 int IdOrdinal = reader.GetOrdinal("Id");
                 int ClienteIdOrdinal = reader.GetOrdinal("ClienteId");
                 int VehiculoIdOrdinal = reader.GetOrdinal("VehiculoId");
@@ -24,7 +20,6 @@ namespace DataLayer
                 int FechaInicioOrdinal = reader.GetOrdinal("FechaInicio");
                 int FechaFinOrdinal = reader.GetOrdinal("FechaFin");
                 int EstadoOrdinal = reader.GetOrdinal("Estado");
-
                 while (reader.Read())
                 {
                     reserva = new ReservaCLS();
@@ -36,24 +31,21 @@ namespace DataLayer
                     reserva.FechaInicio = reader.GetDateTime(FechaInicioOrdinal).ToString();
                     reserva.FechaFin = reader.GetDateTime(FechaFinOrdinal).ToString();
                     reserva.Estado = reader.GetString(EstadoOrdinal);
-                    list.Add(reserva);
+                    lista.Add(reserva);
                 }
             }
-
-            return list;
+            return lista;
         }
 
-        public List<ReservaCLS> Get()
+        public static List<ReservaCLS> Listar()
         {
-            List<ReservaCLS> list = null;
-
-            db.ExecuteQuery("spGetReservas", (cmd) =>
+            List<ReservaCLS> lista = null;
+            DBConnection.ExecuteQuery("spListarReservas", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                list = Read(cmd.ExecuteReader());
+                lista = Leer(cmd.ExecuteReader());
             });
-
-            return list;
+            return lista;
         }
     }
 }

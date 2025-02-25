@@ -5,11 +5,9 @@ namespace BusinessLayer
 {
     public class VehiculoBL
     {
-        private VehiculoDAL vehiculoDAL = new VehiculoDAL();
-        
-        public List<VehiculoCLS> Get()
+        public static List<VehiculoCLS> Listar()
         {
-            return vehiculoDAL.Get();
+            return VehiculoDAL.Listar();
         }
     }
 }

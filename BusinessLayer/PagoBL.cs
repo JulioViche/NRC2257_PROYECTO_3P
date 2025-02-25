@@ -5,11 +5,9 @@ namespace BusinessLayer
 {
     public class PagoBL
     {
-        private PagoDAL pagoDAL = new PagoDAL();
-
-        public List<PagoCLS> Get()
+        public static List<PagoCLS> Listar()
         {
-            return pagoDAL.Get();
+            return PagoDAL.Listar();
         }
     }
 }

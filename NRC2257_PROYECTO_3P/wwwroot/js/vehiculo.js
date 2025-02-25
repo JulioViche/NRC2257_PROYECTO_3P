@@ -10,14 +10,14 @@ let config = {
 
 async function renderTable() {
     if (getValue('email-input') === '' && getValue('name-input') === '') {
-        config.url = 'Vehiculo/Get';
+        config.url = 'Vehiculo/listar';
         config.method = 'get';
         createTable(config);
     }
     else {
         let form = new FormData(document.getElementById('search-form'));
         console.log(form);
-        config.url = 'Cliente/Filter';
+        config.url = 'Cliente/filtrar';
         config.method = 'post';
         createTable(config, form);
     }

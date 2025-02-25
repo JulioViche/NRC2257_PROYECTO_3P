@@ -6,16 +6,14 @@ namespace NRC2257_PROYECTO_3P.Controllers
 {
     public class ReservaController : Controller
     {
-        private ReservaBL reservaBL = new ReservaBL();
-
         public IActionResult Index()
         {
             return View();
         }
 
-        public List<ReservaCLS> Get()
+        public List<ReservaCLS> Listar()
         {
-            return reservaBL.Get();
+            return ReservaBL.Listar();
         }
     }
 }

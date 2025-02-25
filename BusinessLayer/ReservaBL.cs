@@ -5,11 +5,9 @@ namespace BusinessLayer
 {
     public class ReservaBL
     {
-        private ReservaDAL reservaDAL = new ReservaDAL();
-
-        public List<ReservaCLS> Get()
+        public static List<ReservaCLS> Listar()
         {
-            return reservaDAL.Get();
+            return ReservaDAL.Listar();
         }
     }
 }

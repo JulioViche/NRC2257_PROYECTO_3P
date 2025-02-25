@@ -6,8 +6,6 @@ namespace NRC2257_PROYECTO_3P.Controllers
 {
     public class ClienteController : Controller
     {
-        ClienteBL clienteBL = new ClienteBL();
-
         public IActionResult Index()
         {
             return View();
@@ -18,10 +16,9 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return View();
         }
 
-        public List<ClienteCLS> Get()
+        public List<ClienteCLS> Listar()
         {
-            ClienteBL clienteBL = new ClienteBL();
-            return clienteBL.Get();
+            return ClienteBL.Listar();
         }
     }
 }

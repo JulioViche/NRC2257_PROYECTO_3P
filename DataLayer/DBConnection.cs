@@ -5,7 +5,7 @@ namespace DataLayer
 {
     public class DBConnection
     {
-        public SqlConnection getSqlConnection()
+        private static SqlConnection getSqlConnection()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder();
             builder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"));
@@ -13,7 +13,7 @@ namespace DataLayer
             return new SqlConnection(root.GetConnectionString("connection"));
         }
 
-        public void ExecuteQuery(string query, Action<SqlCommand> parameterSetup = null)
+        public static void ExecuteQuery(string query, Action<SqlCommand> parameterSetup = null)
         {
             using (SqlConnection connection = getSqlConnection())
             {

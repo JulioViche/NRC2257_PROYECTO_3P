@@ -5,24 +5,20 @@ namespace DataLayer
 {
     public class EmpleadoDAL
     {
-        private DBConnection db = new DBConnection();
-
-        public List<EmpleadoCLS> Read(SqlDataReader reader)
+        private static List<EmpleadoCLS> Leer(SqlDataReader reader)
         {
-            List<EmpleadoCLS> list = null;
+            List<EmpleadoCLS> lista = null;
 
             if (reader != null)
             {
-                list = new List<EmpleadoCLS>();
+                lista = new List<EmpleadoCLS>();
                 EmpleadoCLS empleado;
-
                 int IdOrdinal = reader.GetOrdinal("Id");
                 int NombreOrdinal = reader.GetOrdinal("Nombre");
                 int ApellidoOrdinal = reader.GetOrdinal("Apellido");
                 int CargoOrdinal = reader.GetOrdinal("Cargo");
                 int TelefonoOrdinal = reader.GetOrdinal("Telefono");
                 int EmailOrdinal = reader.GetOrdinal("Email");
-
                 while (reader.Read())
                 {
                     empleado = new EmpleadoCLS();
@@ -32,38 +28,73 @@ namespace DataLayer
                     empleado.Cargo = reader.GetString(CargoOrdinal);
                     empleado.Telefono = reader.GetString(TelefonoOrdinal);
                     empleado.Email = reader.GetString(EmailOrdinal);
-                    list.Add(empleado);
+                    lista.Add(empleado);
                 }
             }
-
-            return list;
+            return lista;
         }
 
-        public List<EmpleadoCLS> Get()
+        public static List<EmpleadoCLS> Listar()
         {
-            List<EmpleadoCLS> list = null;
-
-            db.ExecuteQuery("spGetEmpleados", (cmd) =>
+            List<EmpleadoCLS> lista = null;
+            DBConnection.ExecuteQuery("spListarEmpleados", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                list = Read(cmd.ExecuteReader());
+                lista = Leer(cmd.ExecuteReader());
             });
-
-            return list;
+            return lista;
         }
 
-        public List<EmpleadoCLS> Filter(string n)
+        public static List<EmpleadoCLS> Filtrar(string nombre)
         {
-            List<EmpleadoCLS> list = new();
-
-            db.ExecuteQuery("spFiltrarEmpleado", (cmd) =>
+            List<EmpleadoCLS> lista = new();
+            DBConnection.ExecuteQuery("spFiltrarEmpleados", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nombre", n); 
-                list = Read(cmd.ExecuteReader());
+                cmd.Parameters.AddWithValue("@nombre", nombre); 
+                lista = Leer(cmd.ExecuteReader());
             });
+            return lista;
+        }
 
-            return list;
+        public static int Guardar(EmpleadoCLS empleado)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("spSaveEmpleado", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nombre", empleado.Nombre);
+                cmd.Parameters.AddWithValue("@apellido", empleado.Apellido);
+                cmd.Parameters.AddWithValue("@cargo", empleado.Cargo);
+                cmd.Parameters.AddWithValue("@telefono", empleado.Telefono);
+                cmd.Parameters.AddWithValue("@email", empleado.Email);
+                res = cmd.ExecuteNonQuery();
+            });
+            return res;
+        }
+
+        public static int Eliminar(int id)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("spEliminarEmpleado", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                res = cmd.ExecuteNonQuery();
+            });
+            return res;
+        }
+
+        public static EmpleadoCLS Recuperar(int id)
+        {
+            EmpleadoCLS empleado = null;
+            DBConnection.ExecuteQuery("spRecuperarEmpleado", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                empleado = Leer(cmd.ExecuteReader())[0];
+            });
+            return empleado;
         }
     }
 }

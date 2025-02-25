@@ -10,7 +10,7 @@ let config = {
 
 async function renderTable() {
     if (getValue('name-input') === '' && getValue('name-input') === '') {
-        config.url = 'Pago/Get';
+        config.url = 'Pago/listar';
         config.method = 'get';
         createTable(config);
     }

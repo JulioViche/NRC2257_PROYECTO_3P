@@ -6,16 +6,14 @@ namespace NRC2257_PROYECTO_3P.Controllers
 {
     public class SeguroController : Controller
     {
-        private SeguroBL seguroBL = new SeguroBL();
-
         public IActionResult Index()
         {
             return View();
         }
 
-        public List<SeguroCLS> Get()
+        public List<SeguroCLS> Listar()
         {
-            return seguroBL.Get();
+            return SeguroBL.Listar();
         }
     }
 }

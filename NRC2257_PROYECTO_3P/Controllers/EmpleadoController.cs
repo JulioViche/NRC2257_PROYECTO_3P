@@ -6,22 +6,34 @@ namespace NRC2257_PROYECTO_3P.Controllers
 {
     public class EmpleadoController : Controller
     {
-        private EmpleadoBL empleadoBL = new EmpleadoBL();
-        
         public IActionResult Index()
         {
             return View();
         }
 
-        public List<EmpleadoCLS> Get()
+        public List<EmpleadoCLS> Listar()
         {
-            return empleadoBL.Get();
+            return EmpleadoBL.Listar();
         }
          
-        public List<EmpleadoCLS> Filter(string n)
+        public List<EmpleadoCLS> Filtrar(string nombre)
         {
-            EmpleadoBL obj = new EmpleadoBL();
-            return obj.Filter(n);
+            return EmpleadoBL.Filtrar(nombre);
+        }
+
+        public int Guardar(EmpleadoCLS empleado)
+        {
+            return EmpleadoBL.Guardar(empleado);
+        }
+
+        public int Eliminar(int id)
+        {
+            return EmpleadoBL.Eliminar(id);
+        }
+
+        public EmpleadoCLS Recuperar(int id)
+        {
+            return EmpleadoBL.Recuperar(id);
         }
     }
 }

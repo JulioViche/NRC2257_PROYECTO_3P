@@ -5,11 +5,9 @@ namespace BusinessLayer
 {
     public class SeguroBL
     {
-        private SeguroDAL seguroDAL = new SeguroDAL();
-
-        public List<SeguroCLS> Get()
+        public static List<SeguroCLS> Listar()
         {
-            return seguroDAL.Get();
+            return SeguroDAL.Listar();
         }
     }
 }

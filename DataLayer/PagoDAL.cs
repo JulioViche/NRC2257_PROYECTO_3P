@@ -5,17 +5,13 @@ namespace DataLayer
 {
     public class PagoDAL
     {
-        private DBConnection db = new DBConnection();
-
-        public List<PagoCLS> Read(SqlDataReader reader)
+        private static List<PagoCLS> Leer(SqlDataReader reader)
         {
-            List<PagoCLS> list = null;
-
+            List<PagoCLS> lista = null;
             if (reader != null)
             {
-                list = new List<PagoCLS>();
+                lista = new List<PagoCLS>();
                 PagoCLS pago;
-
                 int IdOrdinal = reader.GetOrdinal("Id");
                 int ReservaIdOrdinal = reader.GetOrdinal("ReservaId");
                 int ClienteOrdinal = reader.GetOrdinal("Cliente");
@@ -25,11 +21,9 @@ namespace DataLayer
                 int FechaPagoOrdinal = reader.GetOrdinal("FechaPago");
                 int MontoOrdinal = reader.GetOrdinal("Monto");
                 int MetodoPagoOrdinal = reader.GetOrdinal("MetodoPago");
-
                 while (reader.Read())
                 {
                     pago = new PagoCLS();
-
                     pago.Id = reader.GetInt32(IdOrdinal);
                     pago.ReservaId = reader.GetInt32(ReservaIdOrdinal);
                     pago.Cliente = reader.GetString(ClienteOrdinal);
@@ -39,24 +33,21 @@ namespace DataLayer
                     pago.FechaPago = reader.GetDateTime(FechaPagoOrdinal).ToString();
                     pago.Monto = (float)reader.GetDecimal(MontoOrdinal);
                     pago.MetodoPago = reader.GetString(MetodoPagoOrdinal);
-                    list.Add(pago);
+                    lista.Add(pago);
                 }
             }
-
-            return list;
+            return lista;
         }
 
-        public List<PagoCLS> Get()
+        public static List<PagoCLS> Listar()
         {
-            List<PagoCLS> list = null;
-
-            db.ExecuteQuery("spGetPagos", (cmd) =>
+            List<PagoCLS> lista = null;
+            DBConnection.ExecuteQuery("spListarPagos", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                list = Read(cmd.ExecuteReader());
+                lista = Leer(cmd.ExecuteReader());
             });
-
-            return list;
+            return lista;
         }
     }
 }

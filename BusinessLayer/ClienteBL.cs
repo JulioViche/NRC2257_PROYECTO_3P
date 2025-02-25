@@ -5,11 +5,9 @@ namespace BusinessLayer
 {
     public class ClienteBL
     {
-        private ClienteDAL clienteDAL = new ClienteDAL();
-
-        public List<ClienteCLS> Get()
+        public static List<ClienteCLS> Listar()
         {
-            return clienteDAL.Get();
+            return ClienteDAL.Listar();
         }
     }
 }

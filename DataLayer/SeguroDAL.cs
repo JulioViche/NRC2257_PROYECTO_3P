@@ -5,17 +5,13 @@ namespace DataLayer
 {
     public class SeguroDAL
     {
-        private DBConnection db = new DBConnection();
-
-        public List<SeguroCLS> Read(SqlDataReader reader)
+        private static List<SeguroCLS> Leer(SqlDataReader reader)
         {
-            List<SeguroCLS> list = null;
-
+            List<SeguroCLS> lista = null;
             if (reader != null)
             {
-                list = new List<SeguroCLS>();
+                lista = new List<SeguroCLS>();
                 SeguroCLS seguro;
-
                 int IdOrdinal = reader.GetOrdinal("Id");
                 int ReservaIdOrdinal = reader.GetOrdinal("ReservaId");
                 int ClienteOrdinal = reader.GetOrdinal("Cliente");
@@ -24,7 +20,6 @@ namespace DataLayer
                 int FechaFinOrdinal = reader.GetOrdinal("FechaFin");
                 int TipoSeguroOrdinal = reader.GetOrdinal("TipoSeguro");
                 int CostoOrdinal = reader.GetOrdinal("Costo");
-
                 while (reader.Read())
                 {
                     seguro = new SeguroCLS();
@@ -36,24 +31,21 @@ namespace DataLayer
                     seguro.FechaFin = reader.GetDateTime(FechaFinOrdinal).ToString();
                     seguro.TipoSeguro = reader.GetString(TipoSeguroOrdinal);
                     seguro.Costo = (float)reader.GetDecimal(CostoOrdinal);
-                    list.Add(seguro);
+                    lista.Add(seguro);
                 }
             }
-
-            return list;
+            return lista;
         }
 
-        public List<SeguroCLS> Get()
+        public static List<SeguroCLS> Listar()
         {
-            List<SeguroCLS> list = null;
-
-            db.ExecuteQuery("spGetSeguros", (cmd) =>
+            List<SeguroCLS> lista = null;
+            DBConnection.ExecuteQuery("spListarSeguros", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                list = Read(cmd.ExecuteReader());
+                lista = Leer(cmd.ExecuteReader());
             });
-
-            return list;
+            return lista;
         }
     }
 }

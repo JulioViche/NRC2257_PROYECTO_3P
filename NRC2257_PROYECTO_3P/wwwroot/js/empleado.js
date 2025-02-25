@@ -9,25 +9,20 @@ let config = {
 };
 
 async function renderTable() {
-    if (getValue('email-input') === '' && getValue('name-input') === '') {
-        config.url = 'Empleado/Get';
+    if (getValue('nombre-input') === '') {
+        config.url = 'Empleado/listar';
         config.method = 'get';
         createTable(config);
     }
     else {
         let form = new FormData(document.getElementById('search-form'));
-        console.log(form);
-        config.url = 'Empleado/Filter';
+        config.url = 'Empleado/filtrar';
         config.method = 'post';
         createTable(config, form);
     }
 }
 
-function search() {
-    resetForm();
-    renderTable();
-}
-
 function resetForm() {
     document.getElementById('search-form').reset();
+    renderTable();
 }

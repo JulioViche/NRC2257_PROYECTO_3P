@@ -5,19 +5,30 @@ namespace BusinessLayer
 {
     public class EmpleadoBL
     {
-        private EmpleadoDAL empleadoDAL = new EmpleadoDAL();
-
-        public List<EmpleadoCLS> Get()
+        public static List<EmpleadoCLS> Listar()
         {
-            return empleadoDAL.Get();
+            return EmpleadoDAL.Listar();
         }
 
-        public List<EmpleadoCLS> Filter(string n)
+        public static List<EmpleadoCLS> Filtrar(string nombre)
         {
-            EmpleadoDAL obj = new EmpleadoDAL();
-            return obj.Filter(n);
+            return EmpleadoDAL.Filtrar(nombre);
 
         }
-       
+
+        public static int Guardar(EmpleadoCLS empleado)
+        {
+            return EmpleadoDAL.Guardar(empleado);
+        }
+
+        public static int Eliminar(int id)
+        {
+            return EmpleadoDAL.Eliminar(id);
+        }
+
+        public static EmpleadoCLS Recuperar(int id)
+        {
+            return EmpleadoDAL.Recuperar(id);
+        }
     }
 }

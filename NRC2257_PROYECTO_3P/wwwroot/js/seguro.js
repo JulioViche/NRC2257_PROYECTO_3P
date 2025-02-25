@@ -10,7 +10,7 @@ let config = {
 
 async function renderTable() {
     if (getValue('email-input') === '' && getValue('name-input') === '') {
-        config.url = 'Seguro/Get';
+        config.url = 'Seguro/listar';
         config.method = 'get';
         createTable(config);
     }

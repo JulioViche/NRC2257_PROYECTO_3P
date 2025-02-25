@@ -5,24 +5,19 @@ namespace DataLayer
 {
     public class VehiculoDAL
     {
-        private DBConnection db = new DBConnection();
-
-        public List<VehiculoCLS> Read(SqlDataReader reader)
+        private static List<VehiculoCLS> Leer(SqlDataReader reader)
         {
-            List<VehiculoCLS> list = null;
-
+            List<VehiculoCLS> lista = null;
             if (reader != null)
             {
-                list = new List<VehiculoCLS>();
+                lista = new List<VehiculoCLS>();
                 VehiculoCLS vehiculo;
-
                 int IdOrdinal = reader.GetOrdinal("Id");
                 int MarcaOrdinal = reader.GetOrdinal("Marca");
                 int ModeloOrdinal = reader.GetOrdinal("Modelo");
                 int AñoOrdinal = reader.GetOrdinal("Año");
                 int PrecioOrdinal = reader.GetOrdinal("Precio");
                 int EstadoOrdinal = reader.GetOrdinal("Estado");
-
                 while (reader.Read())
                 {
                     vehiculo = new VehiculoCLS();
@@ -32,24 +27,21 @@ namespace DataLayer
                     vehiculo.Año = reader.GetInt32(AñoOrdinal);
                     vehiculo.Precio = (float)reader.GetDecimal(PrecioOrdinal);
                     vehiculo.Estado = reader.GetString(EstadoOrdinal);
-                    list.Add(vehiculo);
+                    lista.Add(vehiculo);
                 }
             }
-
-            return list;
+            return lista;
         }
 
-        public List<VehiculoCLS> Get()
+        public static List<VehiculoCLS> Listar()
         {
-            List<VehiculoCLS> list = null;
-
-            db.ExecuteQuery("spGetVehiculos", (cmd) =>
+            List<VehiculoCLS> lista = null;
+            DBConnection.ExecuteQuery("spListarVehiculos", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                list = Read(cmd.ExecuteReader());
+                lista = Leer(cmd.ExecuteReader());
             });
-
-            return list;
+            return lista;
         }
     }
 }

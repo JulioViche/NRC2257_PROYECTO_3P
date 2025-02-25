@@ -5,23 +5,18 @@ namespace DataLayer
 {
     public class ClienteDAL
     {
-        private DBConnection db = new DBConnection();
-
-        public List<ClienteCLS> Read(SqlDataReader reader)
+        private static List<ClienteCLS> Leer(SqlDataReader reader)
         {
-            List<ClienteCLS> list = null;
-
+            List<ClienteCLS> lista = null;
             if (reader != null)
             {
-                list = new List<ClienteCLS>();
+                lista = new List<ClienteCLS>();
                 ClienteCLS cliente;
-
                 int IdOrdinal = reader.GetOrdinal("Id");
                 int NombreOrdinal = reader.GetOrdinal("Nombre");
                 int ApellidoOrdinal = reader.GetOrdinal("Apellido");
                 int TelefonoOrdinal = reader.GetOrdinal("Telefono");
                 int EmailOrdinal = reader.GetOrdinal("Email");
-
                 while (reader.Read())
                 {
                     cliente = new ClienteCLS();
@@ -30,24 +25,21 @@ namespace DataLayer
                     cliente.Apellido = reader.GetString(ApellidoOrdinal);
                     cliente.Telefono = reader.GetString(TelefonoOrdinal);
                     cliente.Email = reader.GetString(EmailOrdinal);
-                    list.Add(cliente);
+                    lista.Add(cliente);
                 }
             }
-
-            return list;
+            return lista;
         }
 
-        public List<ClienteCLS> Get()
+        public static List<ClienteCLS> Listar()
         {
-            List<ClienteCLS> list = null;
-
-            db.ExecuteQuery("spGetClientes", (cmd) =>
+            List<ClienteCLS> lista = null;
+            DBConnection.ExecuteQuery("spListarClientes", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                list = Read(cmd.ExecuteReader());
+                lista = Leer(cmd.ExecuteReader());
             });
-
-            return list;
+            return lista;
         }
     }
 }
