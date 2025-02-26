@@ -47,7 +47,7 @@ function createTable(config, form) {
     if (!table) {
         table = document.createElement('table');
         table.setAttribute('id', 'datatable');
-        table.classList.add('table', 'table-sm', 'table-hover', 'table-responsive', 'w-100');
+        table.classList.add('table', 'table-sm', 'table-hover', 'table-responsive', 'w-100', 'mb-0');
         tableContainer.appendChild(table);
     }
 
@@ -72,13 +72,13 @@ function generateTableContent(config, res) {
         if (config.editable || connfig.deletable) {
             content += '<td>';
             content += config.editable ? `<a title="Editar" class="px-2 text-primary" onclick="update(${obj[config.identificator]})"><i class="fa-solid fa-pen-to-square"></i></a>` : '';
-            content += config.deletable ? '<a title="Eliminar" class="px-2 text-danger" href="#"><i class="fa-solid fa-trash-can"></i></a>' : '';
+            content += config.deletable ? `<a title="Eliminar" class="px-2 text-danger" onclick="remove(${obj[config.identificator]})"><i class="fa-solid fa-trash-can"></i></a>` : '';
             content += '</td>';
         }
         content += '</tr>';
     }
     if (config.creatable) {
-        content += `<tr class="create text-center"><td colspan="${config.properties.length + (config.editable || config.deletable ? 1 : 0)}"><a title="Nuevo" class="text-success" onclick="create()"><i class="fa-solid fa-plus"></i></a></td></tr>`;
+        content += `<tr class="create text-center"><td title="Nuevo" class="text-success w-100" onclick="create()" colspan="${config.properties.length + (config.editable || config.deletable ? 1 : 0)}"><i class="fa-solid fa-plus"></i></td></tr>`;
     }
     content += '</tbody>';
 

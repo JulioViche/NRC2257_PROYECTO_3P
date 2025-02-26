@@ -31,9 +31,6 @@ async function filter() {
 }
 
 async function update(id) {
-    var modal = new bootstrap.Modal(document.getElementById('update-modal'));
-    modal.show();
-
     fetchGet('Empleado/recuperar?id=' + id, 'json', res => {
         setValue('modal-id-input', res.id);
         setValue('modal-nombre-input', res.nombre);
@@ -42,6 +39,36 @@ async function update(id) {
         setValue('modal-telefono-input', res.telefono);
         setValue('modal-email-input', res.email);
     });
+    document.getElementById('modal-label').textContent = 'Editar Empleado';
+    document.getElementById('modal-id-group').style.display = 'block';
+    $('#save-modal').modal('show');
+}
+
+
+async function create() {
+    document.getElementById('modal-form').reset();
+    setValue('modal-id-input', 0);
+    document.getElementById('modal-label').textContent = 'Crear Empleado';
+    document.getElementById('modal-id-group').style.display = 'none';
+    $('#save-modal').modal('show');
+}
+
+async function save() {
+    let form = new FormData(document.getElementById('modal-form'));
+    fetchPost('Empleado/guardar', 'text', form, res => {
+        renderTable();
+        if (parseInt(res)) $('#save-modal').modal('hide');
+        else alert('Error al guardar');
+    });
+}
+
+async function remove(id) {
+    if (confirm('¿Está seguro de eliminar el registro?')) {
+        fetchGet('Empleado/eliminar?id=' + id, 'text', res => {
+            renderTable();
+            if (!parseInt(res)) alert('Error al eliminar');
+        });
+    }
 }
 
 function resetForm() {

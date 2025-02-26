@@ -60,9 +60,10 @@ namespace DataLayer
         public static int Guardar(EmpleadoCLS empleado)
         {
             int res = 0;
-            DBConnection.ExecuteQuery("spSaveEmpleado", (cmd) =>
+            DBConnection.ExecuteQuery("spGuardarEmpleado", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", empleado.Id);
                 cmd.Parameters.AddWithValue("@nombre", empleado.Nombre);
                 cmd.Parameters.AddWithValue("@apellido", empleado.Apellido);
                 cmd.Parameters.AddWithValue("@cargo", empleado.Cargo);
