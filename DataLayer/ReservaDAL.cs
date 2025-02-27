@@ -47,5 +47,17 @@ namespace DataLayer
             });
             return lista;
         }
+
+        public static ReservaCLS Recuperar(int id)
+        {
+            ReservaCLS reserva = null;
+            DBConnection.ExecuteQuery("spRecuperarReserva", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                reserva = Leer(cmd.ExecuteReader())[0];
+            });
+            return reserva;
+        }
     }
 }

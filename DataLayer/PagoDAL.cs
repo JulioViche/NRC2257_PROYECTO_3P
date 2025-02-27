@@ -16,8 +16,8 @@ namespace DataLayer
                 int ReservaIdOrdinal = reader.GetOrdinal("ReservaId");
                 int ClienteOrdinal = reader.GetOrdinal("Cliente");
                 int VehiculoOrdinal = reader.GetOrdinal("Vehiculo");
-                int FechaInicioOrdinal = reader.GetOrdinal("FechaInicio");
-                int FechaFinOrdinal = reader.GetOrdinal("FechaFin");
+                int FechaInicioOrdinal = reader.GetOrdinal("ReservaFechaInicio");
+                int FechaFinOrdinal = reader.GetOrdinal("ReservaFechaFin");
                 int FechaPagoOrdinal = reader.GetOrdinal("FechaPago");
                 int MontoOrdinal = reader.GetOrdinal("Monto");
                 int MetodoPagoOrdinal = reader.GetOrdinal("MetodoPago");
@@ -48,6 +48,18 @@ namespace DataLayer
                 lista = Leer(cmd.ExecuteReader());
             });
             return lista;
+        }
+
+        public static PagoCLS Recuperar(int id)
+        {
+            PagoCLS pago = null;
+            DBConnection.ExecuteQuery("spRecuperarPago", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                pago = Leer(cmd.ExecuteReader())[0];
+            });
+            return pago;
         }
     }
 }

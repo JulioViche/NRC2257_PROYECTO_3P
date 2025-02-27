@@ -16,6 +16,11 @@ namespace BusinessLayer
 
         }
 
+        public static EmpleadoCLS Recuperar(int id)
+        {
+            return EmpleadoDAL.Recuperar(id);
+        }
+
         public static int Guardar(EmpleadoCLS empleado)
         {
             return EmpleadoDAL.Guardar(empleado);
@@ -24,11 +29,6 @@ namespace BusinessLayer
         public static int Eliminar(int id)
         {
             return EmpleadoDAL.Eliminar(id);
-        }
-
-        public static EmpleadoCLS Recuperar(int id)
-        {
-            return EmpleadoDAL.Recuperar(id);
         }
     }
 }

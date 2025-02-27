@@ -41,6 +41,57 @@ namespace DataLayer
             });
             return lista;
         }
+
+        public static List<ClienteCLS> Filtrar(string nombre)
+        {
+            List<ClienteCLS> lista = null;
+            DBConnection.ExecuteQuery("spFiltrarClientes", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                lista = Leer(cmd.ExecuteReader());
+            });
+            return lista;
+        }
+
+        public static ClienteCLS Recuperar(int id)
+        {
+            ClienteCLS cliente = null;
+            DBConnection.ExecuteQuery("spRecuperarCliente", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                cliente = Leer(cmd.ExecuteReader())[0];
+            });
+            return cliente;
+        }
+
+        public static int Guardar(ClienteCLS cliente)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("spGuardarCliente", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", cliente.Id);
+                cmd.Parameters.AddWithValue("@nombre", cliente.Nombre);
+                cmd.Parameters.AddWithValue("@apellido", cliente.Apellido);
+                cmd.Parameters.AddWithValue("@telefono", cliente.Telefono);
+                cmd.Parameters.AddWithValue("@email", cliente.Email);
+                res = cmd.ExecuteNonQuery();
+            });
+            return res;
+        }
+
+        public static int Eliminar(int id)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("spEliminarCliente", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                res = cmd.ExecuteNonQuery();
+            });
+            return res;
+        }
     }
 }
 

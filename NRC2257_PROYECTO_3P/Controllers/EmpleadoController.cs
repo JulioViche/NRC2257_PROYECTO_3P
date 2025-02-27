@@ -26,14 +26,14 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return EmpleadoBL.Guardar(empleado);
         }
 
-        public int Eliminar(int id)
-        {
-            return EmpleadoBL.Eliminar(id);
-        }
-
         public EmpleadoCLS Recuperar(int id)
         {
             return EmpleadoBL.Recuperar(id);
+        }
+
+        public int Eliminar(int id)
+        {
+            return EmpleadoBL.Eliminar(id);
         }
     }
 }

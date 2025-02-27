@@ -57,6 +57,18 @@ namespace DataLayer
             return lista;
         }
 
+        public static EmpleadoCLS Recuperar(int id)
+        {
+            EmpleadoCLS empleado = null;
+            DBConnection.ExecuteQuery("spRecuperarEmpleado", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                empleado = Leer(cmd.ExecuteReader())[0];
+            });
+            return empleado;
+        }
+
         public static int Guardar(EmpleadoCLS empleado)
         {
             int res = 0;
@@ -84,18 +96,6 @@ namespace DataLayer
                 res = cmd.ExecuteNonQuery();
             });
             return res;
-        }
-
-        public static EmpleadoCLS Recuperar(int id)
-        {
-            EmpleadoCLS empleado = null;
-            DBConnection.ExecuteQuery("spRecuperarEmpleado", (cmd) =>
-            {
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id", id);
-                empleado = Leer(cmd.ExecuteReader())[0];
-            });
-            return empleado;
         }
     }
 }
