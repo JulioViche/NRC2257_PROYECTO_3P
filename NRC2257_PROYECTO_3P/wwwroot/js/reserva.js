@@ -1,4 +1,6 @@
-﻿window.onload = () => {
+﻿navbarActive('#reservaIndex');
+
+window.onload = () => {
     renderTable();
 }
 

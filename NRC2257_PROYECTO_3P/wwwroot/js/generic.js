@@ -1,4 +1,23 @@
-﻿async function fetchGet(url, type, callback) {
+﻿function navbarActive(id) {
+    $("#accordian ul li").removeClass("active");
+    $(id).addClass("active");
+
+    var tabsVerticalInner = $("#accordian");
+    var activeItemVerticalInner = tabsVerticalInner.find('.active');
+    var itemPosVerticalTop = activeItemVerticalInner.position();
+    var itemPosVerticalLeft = activeItemVerticalInner.position();
+    var activeWidthVerticalHeight = activeItemVerticalInner.innerHeight();
+    var activeWidthVerticalWidth = activeItemVerticalInner.innerWidth();
+
+    $(".selector-active").css({
+        top: itemPosVerticalTop.top + "px",
+        left: itemPosVerticalLeft.left + "px",
+        height: activeWidthVerticalHeight + "px",
+        width: activeWidthVerticalWidth + "px"
+    });
+}
+
+async function fetchGet(url, type, callback) {
     try {
         let root = document.getElementById('root').value;
         let absoluteUrl = window.location.protocol + '//' + window.location.host + '/' + root + url;

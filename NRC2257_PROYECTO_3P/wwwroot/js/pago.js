@@ -1,4 +1,6 @@
-﻿window.onload = () => {
+﻿navbarActive('#pagoIndex');
+
+window.onload = () => {
     renderTable();
 }
 

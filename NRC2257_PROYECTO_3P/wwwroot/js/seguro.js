@@ -1,4 +1,6 @@
-﻿window.onload = () => {
+﻿navbarActive('#seguroIndex');
+
+window.onload = () => {
     renderTable();
 }
 

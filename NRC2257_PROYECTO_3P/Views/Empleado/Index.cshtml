@@ -63,10 +63,12 @@
 <hr>
 
 <div class="card w-auto d">
-    <div class="card-header">
-        Empleados
+    <div class="card-header text-bg-dark">
+        <h5 class="mb-0">Empleados</h5>
     </div>
-    <div id="datatable-container" class="card-body d-flex justify-content-center w-100 p-2 pb-0"></div>
+    <div id="datatable-container" class="card-body d-flex justify-content-center w-100 p-0"></div>
 </div>
 
-<script src="~/js/empleado.js"></script>
+@section Scripts {
+    <script src="~/js/empleado.js"></script>
+}

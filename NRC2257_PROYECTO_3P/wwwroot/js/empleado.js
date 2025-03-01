@@ -1,4 +1,6 @@
-﻿window.onload = () => {
+﻿navbarActive('#empleadoIndex');
+
+window.onload = () => {
     renderTable();
 }
 
@@ -10,6 +12,7 @@ let config = {
     deletable: true,
     creatable: true
 };
+
 function renderTable() {
     if (getValue('nombre-input') === '')
         list();

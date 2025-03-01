@@ -1,4 +1,6 @@
-﻿window.onload = () => {
+﻿navbarActive('#vehiculoIndex');
+
+window.onload = () => {
     renderTable();
 }
 
