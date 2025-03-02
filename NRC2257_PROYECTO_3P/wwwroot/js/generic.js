@@ -63,43 +63,62 @@ function createTable(config, form) {
     let tableContainer = document.getElementById('datatable-container');
     let table = document.getElementById('datatable');
 
+    // Crear la tabla si no existe
     if (!table) {
         table = document.createElement('table');
         table.setAttribute('id', 'datatable');
-        table.classList.add('table', 'table-sm', 'table-hover', 'table-responsive', 'w-100', 'mb-0');
+        table.classList.add('table', 'table-sm', 'table-hover', 'w-100');
         tableContainer.appendChild(table);
     }
 
+    // Obtener datos con métodos GET o POST
     if (config.method === 'get')
-        fetchGet(config.url, 'json', res => table.innerHTML = generateTableContent(config, res));
+        fetchGet(config.url, 'json', res => updateTableContent(config, res));
     if (config.method === 'post')
-        fetchPost(config.url, 'json', form, res => table.innerHTML = generateTableContent(config, res));
+        fetchPost(config.url, 'json', form, res => updateTableContent(config, res));
+}
+
+function updateTableContent(config, res) {
+    let table = document.getElementById('datatable');
+    table.innerHTML = generateTableContent(config, res);
+
+    // Destruir instancia previa de DataTables si existe
+    if ($.fn.dataTable.isDataTable('#datatable')) {
+        $('#datatable').DataTable().destroy();
+    }
+
+    // Inicializar DataTables con configuración mínima
+    new DataTable('#datatable');
 }
 
 function generateTableContent(config, res) {
-    let content = '';
+    let content = '<thead><tr>';
+    for (let header of config.headers) content += `<th>${header}</th>`;
+    content += (config.editable || config.deletable) ? '<th>Acciones</th>' : '';
+    content += '</tr></thead><tbody>';
 
-    content += '<thead><tr>';
-    for (header of config.headers) content += `<th class="px-lg-3 px-1">${header}</th>`;
-    content += config.editable ? '<th></th>' : '';
-    content += '</tr></thead>';
-
-    content += '<tbody class"table-group-divider">';
-    for (obj of res) {
+    for (let obj of res) {
         content += '<tr>';
-        for (property of config.properties) content += `<td class="px-lg-3 px-1">${obj[property]}</td>`;
-        if (config.editable || connfig.deletable) {
+        for (let property of config.properties) {
+            content += `<td>${obj[property]}</td>`;
+        }
+        if (config.editable || config.deletable) {
             content += '<td>';
-            content += config.editable ? `<a title="Editar" class="px-2 text-primary" onclick="update(${obj[config.identificator]})"><i class="fa-solid fa-pen-to-square"></i></a>` : '';
-            content += config.deletable ? `<a title="Eliminar" class="px-2 text-danger" onclick="remove(${obj[config.identificator]})"><i class="fa-solid fa-trash-can"></i></a>` : '';
+            content += config.editable
+                ? `<a title="Editar" class="px-2 text-primary" onclick="update(${obj[config.identificator]})">
+                     <i class="fa-solid fa-pen-to-square"></i>
+                   </a>`
+                : '';
+            content += config.deletable
+                ? `<a title="Eliminar" class="px-2 text-danger" onclick="remove(${obj[config.identificator]})">
+                     <i class="fa-solid fa-trash-can"></i>
+                   </a>`
+                : '';
             content += '</td>';
         }
         content += '</tr>';
     }
-    if (config.creatable) {
-        content += `<tr class="create text-center"><td title="Nuevo" class="text-success w-100" onclick="create()" colspan="${config.properties.length + (config.editable || config.deletable ? 1 : 0)}"><i class="fa-solid fa-plus"></i></td></tr>`;
-    }
-    content += '</tbody>';
 
+    content += '</tbody>';
     return content;
 }
