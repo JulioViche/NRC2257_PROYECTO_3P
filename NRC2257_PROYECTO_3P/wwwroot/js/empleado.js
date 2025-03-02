@@ -26,12 +26,14 @@ async function list() {
     createTable(config);
 }
 
+
 async function filter() {
     let form = new FormData(document.getElementById('search-form'));
     config.url = 'Empleado/filtrar';
     config.method = 'post';
     createTable(config, form);
 }
+
 
 async function update(id) {
     fetchGet('Empleado/recuperar?id=' + id, 'json', res => {
@@ -56,6 +58,7 @@ async function create() {
     $('#save-modal').modal('show');
 }
 
+
 async function save() {
     let form = new FormData(document.getElementById('modal-form'));
     fetchPost('Empleado/guardar', 'text', form, res => {
@@ -65,14 +68,21 @@ async function save() {
     });
 }
 
+
 async function remove(id) {
-    if (confirm('¿Está seguro de eliminar el registro?')) {
-        fetchGet('Empleado/eliminar?id=' + id, 'text', res => {
-            renderTable();
-            if (!parseInt(res)) alert('Error al eliminar');
+    fetchGet('Empleado/Recuperar?id=' + id, 'json', res => {
+        let Nombre = res.nombre;
+
+        Confirmacion(undefined, "¿Desea eliminar: " + Nombre + "?", function () {
+            fetchGet('Empleado/Eliminar?id=' + id, 'text', res => {
+                Exito();
+                renderTable();
+                if (!parseInt(res)) alert('Error al eliminar');
+            });
         });
-    }
-}
+    });
+} 
+
 
 function resetForm() {
     document.getElementById('search-form').reset();
