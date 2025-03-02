@@ -50,7 +50,7 @@
 <fieldset class="row mt-3">
     <form id="search-form" method="post" class="col-md-9 col-12 row">
         <div class="col mb-2">
-            <input id="nombre-input" class="form-control" name="nombre" type="text" placeholder="Nombre y apellido" onkeyup="renderTable()">
+            <input id="nombre-input" class="form-control" name="nombre" type="text" placeholder="Nombre y apellido" onkeyup="renderGrid()">
         </div>
     </form>
     <div class="col row">
@@ -62,12 +62,14 @@
 
 <hr>
 
-<div class="card w-auto d">
+@*<div class="card w-auto d">
     <div class="card-header text-bg-dark">
         <h5 class="mb-0">Empleados</h5>
     </div>
     <div id="datatable-container" class="card-body d-flex justify-content-center w-100 p-0"></div>
-</div>
+</div>*@
+
+<div id="datagrid"></div>
 
 @section Scripts {
     <script src="~/js/empleado.js"></script>
