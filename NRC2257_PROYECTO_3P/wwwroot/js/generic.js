@@ -171,7 +171,7 @@ function Exito()
 //}
 
 function ErrorG() {
-
+    console.log("llamado a la funcion ErrorG")
     toastr.options = {
         "closeButton": false,
         "debug": false,
