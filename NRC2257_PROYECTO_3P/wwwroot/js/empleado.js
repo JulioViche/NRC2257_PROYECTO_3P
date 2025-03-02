@@ -75,7 +75,7 @@ async function remove(id) {
 
         Confirmacion(undefined, "¿Desea eliminar: " + Nombre + "?", function () {
             fetchGet('Empleado/Eliminar?id=' + id, 'text', res => {
-                Exito();
+                Exito(); ErrorG();
                 renderTable();
                 if (!parseInt(res)) alert('Error al eliminar');
             });
