@@ -76,6 +76,20 @@ function createTable(config, form) {
         fetchPost(config.url, 'json', form, res => table.innerHTML = generateTableContent(config, res));
 }
 
+//TEST AG Grid
+function createCard(cardTitle, gridOptions) {
+    let dataCard = $('#datacard');
+    dataCard.addClass('card w-auto d');
+    let header = $('<div>', { class: 'card-header text-bg-dark' }).append(
+        $('<h5>', { class: 'mb-0', text: cardTitle })
+    );
+    let dataGrid = $('<div>', { id: 'datagrid', class: 'card-body justify-content-center w-100 p-0' });
+    dataCard.append(header, dataGrid);
+    document.querySelector('#datagrid').style.height = '300px';
+
+    agGrid.createGrid(document.querySelector('#datagrid'), gridOptions);
+}
+
 function generateTableContent(config, res) {
     let content = '';
 

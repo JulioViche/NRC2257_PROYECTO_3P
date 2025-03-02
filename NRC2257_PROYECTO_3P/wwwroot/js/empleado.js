@@ -1,7 +1,8 @@
 ﻿navbarActive('#empleadoIndex');
 
 window.onload = () => {
-    renderTable();
+    //renderTable();
+    renderCard();
 }
 
 let config = {
@@ -12,6 +13,55 @@ let config = {
     deletable: true,
     creatable: true
 };
+
+function renderCard() {
+    fetchGet('Empleado/listar', 'json', res => {
+        gridOptions = {
+            rowData: res,
+            columnDefs: [
+                {
+                    headerName: 'ID',
+                    field: 'id',
+                    resizable: false,
+                    width: 100
+                },
+                {
+                    headerName: 'Nombre',
+                    field: 'nombre',
+                    minWidth: 150,
+                    filter: true
+                },
+                {
+                    headerName: 'Apellido',
+                    field: 'apellido',
+                    minWidth: 150,
+                    filter: true
+                },
+                {
+                    headerName: 'Cargo',
+                    field: 'cargo',
+                    resizable: false,
+                    width: 100
+                },
+                {
+                    headerName: 'Teléfono',
+                    field: 'telefono',
+                    minWidth: 100
+                },
+                {
+                    headerName: 'Email',
+                    field: 'email',
+                    minWidth: 200,
+                    filter: true
+                }
+            ]
+        };
+
+        let myGridElement = document.querySelector('#datagrid');
+        createCard('Empleados', gridOptions);
+    });
+
+}
 
 function renderTable() {
     if (getValue('nombre-input') === '')
