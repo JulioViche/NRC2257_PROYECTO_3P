@@ -1,5 +1,15 @@
 
+[data-theme="dark"] {
+    --color-primary: #1e40af;
+    --color-secondary: #4b5563;
+    /* Otras variables CSS */
+}
 
+[data-theme="light"] {
+    --color-primary: #60a5fa;
+    --color-secondary: #e5e7eb;
+    /* Otras variables CSS */
+}
 
 
 
