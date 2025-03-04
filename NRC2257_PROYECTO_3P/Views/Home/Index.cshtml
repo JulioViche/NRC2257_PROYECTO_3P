@@ -192,10 +192,110 @@
             </div>
         </div>
     </div>
-        
+
+
+
+<div class="flex flex-col md:flex-row min-h-[500px] bg-white shadow-lg">
+    <div class="w-full md:w-1/2 p-8 flex flex-col justify-center relative">
+        <div id="testimonialCarousel" class="overflow-hidden">
+            <div class="testimonial-slide transition-transform duration-700 ease-in-out">
+                <svg class="w-12 h-12 text-blue-600 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-7l-3-3z" />
+                </svg>
+                <blockquote class="text-lg italic text-gray-800 mb-4">
+                    "Un servicio increíble que superó todas mis expectativas. Recomendado al 100%."
+                </blockquote>
+                <div class="flex items-center">
+                    <img src="/api/placeholder/100/100" alt="Customer"
+                         class="w-12 h-12 rounded-full mr-4 object-cover">
+                    <div>
+                        <p class="font-bold text-gray-900">María Rodríguez</p>
+                        <p class="text-gray-600">Cliente Frecuente</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide hidden transition-transform duration-700 ease-in-out">
+                <svg class="w-12 h-12 text-blue-600 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-7l-3-3z" />
+                </svg>
+                <blockquote class="text-lg italic text-gray-800 mb-4">
+                    "La mejor experiencia que he tenido. Profesionalismo y calidad ante todo."
+                </blockquote>
+                <div class="flex items-center">
+                    <img src="/api/placeholder/100/100" alt="Customer"
+                         class="w-12 h-12 rounded-full mr-4 object-cover">
+                    <div>
+                        <p class="font-bold text-gray-900">Carlos Mendoza</p>
+                        <p class="text-gray-600">Empresario</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide hidden transition-transform duration-700 ease-in-out">
+                <svg class="w-12 h-12 text-blue-600 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-7l-3-3z" />
+                </svg>
+                <blockquote class="text-lg italic text-gray-800 mb-4">
+                    "Un equipo extraordinario que se preocupa realmente por sus clientes."
+                </blockquote>
+                <div class="flex items-center">
+                    <img src="/api/placeholder/100/100" alt="Customer"
+                         class="w-12 h-12 rounded-full mr-4 object-cover">
+                    <div>
+                        <p class="font-bold text-gray-900">Elena Sánchez</p>
+                        <p class="text-gray-600">Consultora</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2">
+        <div id="map" class="w-full h-full"></div>
+    </div>
+</div>
+
 
 
 
 @section Scripts {
     <script src="~/js/home.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            let currentSlide = 0;
+
+            function nextSlide() {
+                // Oculta el slide actual
+                slides[currentSlide].classList.add('hidden');
+
+                // Avanza al siguiente slide
+                currentSlide = (currentSlide + 1) % slides.length;
+
+                // Muestra el nuevo slide
+                slides[currentSlide].classList.remove('hidden');
+            }
+
+            // Cambia de slide cada 5 segundos
+            setInterval(nextSlide, 5000);
+        });
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgF9E_TtFlDuCbXvGXo-mCR0IvkcQG9H4"></script>
+    <script>
+        function initMap() {
+            const location = { lat: -0.1806532, lng: -78.4678382 }; // Quito coordinates
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: location
+            });
+            new google.maps.Marker({
+                position: location,
+                map: map,
+                title: 'Autos de alquiler quito'
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
 }
