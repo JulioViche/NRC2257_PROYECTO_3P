@@ -16,9 +16,9 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return VehiculoBL.Listar();
         }
 
-        public List<VehiculoCLS> Filtrar(string nombre)
+        public List<VehiculoCLS> Filtrar(string filtro)
         {
-            return VehiculoBL.Filtrar(nombre);
+            return VehiculoBL.Filtrar(filtro);
         }
 
         public VehiculoCLS Recuperar(int id)

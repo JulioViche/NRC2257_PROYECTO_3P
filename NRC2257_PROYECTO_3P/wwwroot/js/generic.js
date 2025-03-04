@@ -75,6 +75,49 @@ function operationsColumn(config) {
     }
 }
 
+// Fechas: Formatter, Sorter, Filter
+function getDate(cellValue) {
+    const [day, month, year] = cellValue.split(" ")[0].split("/").map(Number);
+    return new Date(year, month - 1, day);
+}
+
+function dateFormatter(options) {
+    const date = getDate(options.value);
+    let weekday = date.toLocaleDateString("es-ES", { weekday: 'long' });
+    weekday = weekday[0].toUpperCase() + weekday.slice(1);
+    let day = date.toLocaleDateString("es-ES", { day: '2-digit' });
+    let month = date.toLocaleDateString("es-ES", { month: 'short' });
+    month = month[0].toUpperCase() + month.slice(1);
+    let year = date.getFullYear();
+    return `${weekday}, ${day}-${month}-${year}`;
+}
+
+function dateSorterComparator(cellDate1, cellDate2) {
+    const date1 = getDate(cellDate1);
+    const date2 = getDate(cellDate2);
+    return date1 - date2;
+}
+
+function dateFilterComparator(filterLocalDateAtMidnight, cellValue) {
+    const cellDate = getDate(cellValue);
+    if (cellDate < filterLocalDateAtMidnight) return -1;
+    if (cellDate > filterLocalDateAtMidnight) return 1;
+    return 0;
+}
+
+function dateColumn(config) {
+    return {
+        headerName: config.headerName,
+        field: config.field,
+        comparator: dateSorterComparator,
+        valueFormatter: dateFormatter,
+        minWidth: 200,
+        flex: 1,
+        filter: 'agDateColumnFilter',
+        filterParams: { comparator: dateFilterComparator }
+    }
+}
+
 async function fetchGet(url, type, callback) {
     try {
         let root = document.getElementById('root').value;
@@ -143,20 +186,4 @@ function swalAlert(icon, title, text) {
         icon: icon,
         confirmButtonColor: '#777'
     });
-}
-
-function getDate(cellValue) {
-    const [day, month, year] = cellValue.split(" ")[0].split("/").map(Number);
-    return new Date(year, month - 1, day);
-}
-
-function formattedDate(cellValue) {
-    const date = getDate(cellValue);
-    let weekday = date.toLocaleDateString("es-ES", { weekday: 'long' });
-    weekday = weekday[0].toUpperCase() + weekday.slice(1);
-    let day = date.toLocaleDateString("es-ES", { day: '2-digit' });
-    let month = date.toLocaleDateString("es-ES", { month: 'short' });
-    month = month[0].toUpperCase() + month.slice(1);
-    let year = date.getFullYear();
-    return `${weekday}, ${day}-${month}-${year}`;
 }

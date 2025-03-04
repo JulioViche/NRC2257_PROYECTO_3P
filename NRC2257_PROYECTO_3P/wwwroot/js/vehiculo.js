@@ -72,12 +72,12 @@ function renderGrid() {
             window.gridApi.updateGridOptions({ rowData: res });
         });
     else
-        fetchGet('Vehiculo/filtrar?nombre=' + getValue('global-filter'), 'json', res => {
+        fetchGet('Vehiculo/filtrar?filtro=' + getValue('global-filter'), 'json', res => {
             window.gridApi.updateGridOptions({ rowData: res });
         });
 }
 
-async function update(id) {
+function update(id) {
     fetchGet('Vehiculo/recuperar?id=' + id, 'json', res => {
         setValue('id-input', res.id);
         setValue('marca-input', res.marca);
@@ -91,7 +91,7 @@ async function update(id) {
 }
 
 
-async function create() {
+function create() {
     document.getElementById('modal-form').reset();
     setValue('id-input', 0);
     document.getElementById('modal-label').textContent = 'Registrar Vehículo';
@@ -99,7 +99,7 @@ async function create() {
     $('#save-modal').modal('show');
 }
 
-async function save() {
+function save() {
     const form = new FormData(document.getElementById('modal-form'));
     fetchPost('Vehiculo/guardar', 'text', form, res => {
         console.log(getValue('id-input'));
@@ -114,7 +114,7 @@ async function save() {
     });
 }
 
-async function remove(id, rowIndex) {
+function remove(id, rowIndex) {
     const rowNode = window.gridApi.getRowNode(rowIndex);
     const nombre = rowNode ? rowNode.data.marca + ' ' + rowNode.data.modelo + ' ' + rowNode.data.año : 'UK';
 

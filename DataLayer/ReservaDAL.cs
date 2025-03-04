@@ -48,6 +48,18 @@ namespace DataLayer
             return lista;
         }
 
+        public static List<ReservaCLS> Filtrar(string filtro)
+        {
+            List<ReservaCLS> lista = null;
+            DBConnection.ExecuteQuery("spFiltrarReservas", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@filtro", filtro);
+                lista = Leer(cmd.ExecuteReader());
+            });
+            return lista;
+        }
+
         public static ReservaCLS Recuperar(int id)
         {
             ReservaCLS reserva = null;

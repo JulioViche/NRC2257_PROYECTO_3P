@@ -70,7 +70,7 @@ function renderGrid() {
         });
 }
 
-async function update(id) {
+function update(id) {
     fetchGet('Cliente/recuperar?id=' + id, 'json', res => {
         setValue('id-input', res.id);
         setValue('nombre-input', res.nombre);
@@ -84,7 +84,7 @@ async function update(id) {
 }
 
 
-async function create() {
+function create() {
     document.getElementById('modal-form').reset();
     setValue('id-input', 0);
     document.getElementById('modal-label').textContent = 'Registrar Cliente';
@@ -92,7 +92,7 @@ async function create() {
     $('#save-modal').modal('show');
 }
 
-async function save() {
+function save() {
     const form = new FormData(document.getElementById('modal-form'));
     fetchPost('Cliente/guardar', 'text', form, res => {
         if (parseInt(res)) {
@@ -106,7 +106,7 @@ async function save() {
     });
 }
 
-async function remove(id, rowIndex) {
+function remove(id, rowIndex) {
     const rowNode = window.gridApi.getRowNode(rowIndex);
     const nombre = rowNode ? rowNode.data.nombre + ' ' + rowNode.data.apellido : 'UK';
 
