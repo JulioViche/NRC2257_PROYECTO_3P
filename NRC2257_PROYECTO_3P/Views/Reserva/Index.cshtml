@@ -5,6 +5,46 @@
 
 <h1>Registro de Reservas</h1>
 
+<div id="save-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-label" class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form" method="post" class="row">
+                    <div id="modal-id-group" class="col-2 mb-2">
+                        <label class="col-form-label mb-0">Id:</label>
+                        <input id="id-input" class="form-control" name="Id" type="text" placeholder="?" contenteditable="false" required readonly>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label class="col-form-label mb-0">Cliente:</label>
+                        <input id="cliente-filter" class="form-control" type="text" placeholder="Buscar..." onkeyup="renderClienteOptions()">
+                        <select id="cliente-input" class="form-select" name="ClienteId" required></select>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label class="col-form-label mb-0">Vehiculo:</label>
+                        <input id="vehiculo-filter" class="form-control" type="text" placeholder="Buscar..." onkeyup="renderVehiculoOptions()">
+                        <select id="vehiculo-input" class="form-select" name="VehiculoId" required></select>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Fecha inicial:</label>
+                        <input id="fecha-inicio-input" class="form-control" name="fechaInicio" type="date" min="" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Fecha final:</label>
+                        <input id="fecha-fin-input" class="form-control" name="fechaFin" type="date" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary w-100" onclick="save()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <fieldset class="row mt-3">
     <form id="global-filter-form" method="post" class="col-md-9 col-12 row">
         <div class="col mb-2">

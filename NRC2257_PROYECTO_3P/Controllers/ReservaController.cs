@@ -15,5 +15,15 @@ namespace NRC2257_PROYECTO_3P.Controllers
         {
             return ReservaBL.Listar();
         }
+
+        public List<ReservaCLS> Filtrar(string filtro)
+        {
+            return ReservaBL.Filtrar(filtro);
+        }
+
+        public ReservaCLS Recuperar(int id)
+        {
+            return ReservaBL.Recuperar(id);
+        }
     }
 }

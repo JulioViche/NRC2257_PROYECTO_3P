@@ -9,5 +9,15 @@ namespace BusinessLayer
         {
             return ReservaDAL.Listar();
         }
+
+        public static List<ReservaCLS> Filtrar(string filtro)
+        {
+            return ReservaDAL.Filtrar(filtro);
+        }
+
+        public static ReservaCLS Recuperar(int id)
+        {
+            return ReservaDAL.Recuperar(id);
+        }
     }
 }

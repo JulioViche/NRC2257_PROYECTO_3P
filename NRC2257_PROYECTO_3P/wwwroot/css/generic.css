@@ -148,13 +148,13 @@ footer {
 }
 
 .ag-row.reserva-en-curso {
-    background-color: #3f33;
+    background-color: #3f37;
 }
 
 .ag-row.reserva-finalizada {
-    background-color: #3333;
+    background-color: #3337;
 }
 
 .ag-row.reserva-atrasada {
-    background-color: #f333;
+    background-color: #f337;
 }

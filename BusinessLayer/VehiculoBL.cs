@@ -10,9 +10,9 @@ namespace BusinessLayer
             return VehiculoDAL.Listar();
         }
 
-        public static List<VehiculoCLS> Filtrar(string nombre)
+        public static List<VehiculoCLS> Filtrar(string filtro)
         {
-            return VehiculoDAL.Filtrar(nombre);
+            return VehiculoDAL.Filtrar(filtro);
         }
 
         public static VehiculoCLS Recuperar(int id)

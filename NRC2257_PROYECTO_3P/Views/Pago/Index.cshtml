@@ -1,45 +1,29 @@
 ﻿
 @{
-    ViewData["Title"] = "Index Pago";
+    ViewData["Title"] = "Registro de Pagos";
 }
 
-<h1>Búsqueda de Pagos</h1>
-
+<h1>Registro de Pagos</h1>
 
 <fieldset class="row mt-3">
-    <form id="search-form" method="post" class="col-md-9 col-12 row">
-        <div class="col-3 mb-2">
-            <input id="email-input" class="form-control" name="cliente" type="text" placeholder="Cliente">
-        </div>
-        <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="vehiculo" type="text" placeholder="Vehículo">
-        </div>
-        <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="fechainicio" type="text" placeholder="Fecha Inicio">
-        </div>
-        <div class="col-3 mb-2">
-            <input id="email-input" class="form-control" name="fechafin" type="text" placeholder="Fecha Fin">
-        </div>
-        <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="metodopago" type="text" placeholder="Método de Pago">
-        </div>
-        <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="pechapago" type="text" placeholder="Fecha de Pago">
+    <form id="global-filter-form" method="post" class="col-md-9 col-12 row">
+        <div class="col mb-2">
+            <input id="global-filter" class="form-control" type="text" placeholder="Buscar..." onkeyup="renderGrid()">
         </div>
     </form>
     <div class="col row">
         <div class="col-6 mb-2">
-            <button class="btn btn-primary w-100" onclick="search()">Buscar</button>
+            <button class="btn btn-danger w-100" onclick="resetGlobalFilter()">Limpiar</button>
         </div>
         <div class="col-6 mb-2">
-            <button class="btn btn-danger w-100" onclick="resetForm()">Limpiar</button>
+            <button class="btn btn-success w-100" onclick="create()">Nuevo</button>
         </div>
     </div>
 </fieldset>
 
 <hr>
 
-<div id="datatable-container" class="d-flex justify-content-center w-100"></div>
+<div id="datagrid"></div>
 
 @section Scripts {
     <script src="~/js/pago.js"></script>
