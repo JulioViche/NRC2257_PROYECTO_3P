@@ -1,7 +1,6 @@
 ﻿.card-carousel {
     scroll-behavior: smooth;
   
-    overflow-x: auto;
 }
 
 .image-carousel {

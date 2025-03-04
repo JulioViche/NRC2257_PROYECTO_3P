@@ -118,9 +118,10 @@ html.dark #accordian ul li a.active {
 }
 
 html:not(.dark) #accordian ul li a:hover,
-html:not(.dark) #accordian ul li a.active {
-    background: #e2e8f0;
+html:not(.dark) #accordian ul li a.active {   
+    background: #3b82f6;
     border-left-color: #2563eb;
+   
 }
 
 #accordian > ul > li.active > a {
@@ -144,6 +145,7 @@ html:not(.dark) #accordian ul li a.active {
     transform: rotate(90deg);
 }
 
+
 .selector-active {
     width: 100%;
     display: inline-block;
@@ -165,33 +167,16 @@ html:not(.dark) #accordian ul li a.active {
         right: 0;
     }
 
-    .selector-active .top {
-        top: -25px;
-    }
-
-    .selector-active .bottom {
-        bottom: -25px;
-    }
-
+  
         .selector-active .bottom:before,
         .selector-active .top:before {
             content: "";
             position: absolute;
             width: 50px;
             height: 50px;
-            border-radius: 50%;
             background-color: var(--nav-bg);
         }
 
-    .selector-active .top:before {
-        left: -25px;
-        top: -25px;
-    }
-
-    .selector-active .bottom:before {
-        bottom: -25px;
-        left: -25px;
-    }
 
 /* Botones y controles */
 .btn-primary {
@@ -209,34 +194,10 @@ html:not(.dark) #theme-toggle {
     color: #1f2937;
 }
 
+
 html.dark #theme-toggle {
     background-color: #3b82f6;
     color: white;
-}
-
-/* Datatables */
-#datatable tr i {
-    color: #7775;
-}
-
-#datatable tr:hover i {
-    color: inherit;
-}
-
-#datatable tr.create td {
-    border: none;
-}
-
-#datatable tr.create:hover td {
-    border: inherit;
-}
-
-#datatable tr.create i {
-    color: transparent;
-}
-
-#datatable tr.create:hover i {
-    color: inherit;
 }
 
 /* Datagrid */
