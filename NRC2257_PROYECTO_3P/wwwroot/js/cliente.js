@@ -87,7 +87,7 @@ async function update(id) {
 async function create() {
     document.getElementById('modal-form').reset();
     setValue('id-input', 0);
-    document.getElementById('modal-label').textContent = 'Crear Cliente';
+    document.getElementById('modal-label').textContent = 'Registrar Cliente';
     document.getElementById('modal-id-group').style.display = 'none';
     $('#save-modal').modal('show');
 }
