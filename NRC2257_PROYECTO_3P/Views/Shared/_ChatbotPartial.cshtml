@@ -1,0 +1,97 @@
+﻿
+@* _ChatbotPartial.cshtml *@
+<div class="fixed bottom-4 right-4 z-50">
+    <!-- Botón de chat minimizado -->
+    <div id="chatbot-minimized" class="bg-blue-500 text-white p-3 rounded-full shadow-lg cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+    </div>
+
+    <!-- Ventana de chat completa -->
+    <div id="chatbot-container" class="hidden w-80 bg-white rounded-lg shadow-xl border border-gray-200 fixed bottom-4 right-4">
+        <!-- Encabezado del chat -->
+        <div class="bg-blue-500 text-white p-3 rounded-t-lg flex justify-between items-center">
+            <h3 class="font-semibold">Soporte</h3>
+            <div class="flex space-x-2">
+                <button id="minimize-chat" class="hover:bg-blue-600 rounded-full p-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                    </svg>
+                </button>
+                
+            </div>
+        </div>
+
+        <!-- Contenedor de mensajes -->
+        <div id="chat-messages" class="h-64 overflow-y-auto p-3 space-y-2">
+            <div class="bg-blue-100 text-blue-800 p-2 rounded-lg max-w-[80%]">
+                Enseguida el asistente te responderá. 
+            </div>
+        </div>
+
+        <!-- Entrada de mensaje -->
+        <div class="p-3 border-t flex items-center space-x-2">
+            <input id="chat-input"
+                   type="text"
+                   placeholder="Escribe tu mensaje..."
+                   class="flex-grow p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="send-message"
+                    class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+     document.addEventListener('DOMContentLoaded', () => {
+        const chatbotMinimized = document.getElementById('chatbot-minimized');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const minimizeChat = document.getElementById('minimize-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendMessage = document.getElementById('send-message');
+        const chatMessages = document.getElementById('chat-messages');
+
+        // Abrir chat
+        chatbotMinimized.addEventListener('click', () => {
+            chatbotMinimized.classList.add('hidden');
+            chatbotContainer.classList.remove('hidden');
+        });
+
+        // Minimizar chat
+        minimizeChat.addEventListener('click', () => {
+            chatbotContainer.classList.add('hidden');
+            chatbotMinimized.classList.remove('hidden');
+        });
+
+        // Enviar mensaje
+        sendMessage.addEventListener('click', sendChatMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendChatMessage();
+        });
+
+        function sendChatMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add(
+                    'bg-blue-500',
+                    'text-white',
+                    'p-2',
+                    'rounded-lg',
+                    'max-w-[80%]',
+                    'self-end',
+                    'ml-auto'
+                );
+                messageElement.textContent = message;
+                chatMessages.appendChild(messageElement);
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+    });
+</script>

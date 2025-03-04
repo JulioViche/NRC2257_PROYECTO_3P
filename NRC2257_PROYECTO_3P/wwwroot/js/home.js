@@ -23,4 +23,8 @@ prevCardBtn.addEventListener('click', () => {
     cardCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
 });
 
+//Btn banner Alquilar
+function registerButtonClick() {
+    alert('¡Botón de registro clickeado!');
 
+}

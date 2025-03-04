@@ -68,11 +68,17 @@
 
     <input type="hidden" id="root" value="@Url.Content("~")" />
 
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+           
         </main>
     </div>
+
+
+    @await Html.PartialAsync("_ChatbotPartial")
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -90,6 +96,7 @@
     <script src="~/js/site.js"></script>
     <script src="~/js/generic.js"></script>
 
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
