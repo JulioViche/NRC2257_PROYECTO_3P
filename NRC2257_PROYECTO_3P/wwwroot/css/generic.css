@@ -11,33 +11,6 @@ footer {
     display: none;
 }*/
 
-/*DATATABLES*/
-/*-------------------------------------------------------------------------------------------------*/
-
-/*#datatable tr i {
-    color: #7775;
-}
-
-#datatable tr:hover i {
-    color: inherit;
-}
-
-#datatable tr.create td {
-    border: none;
-}
-
-#datatable tr.create:hover td {
-    border: inherit;
-}
-
-#datatable tr.create i {
-    color: transparent;
-}
-
-#datatable tr.create:hover i {
-    color: inherit;
-}*/
-
 /*NAVBAR*/
 /*-------------------------------------------------------------------------------------------------*/
 
@@ -145,10 +118,10 @@ footer {
     left: -25px;
 }*/
 
-/*DATAGRID*/
-/*-------------------------------------------------------------------------------------------------*/
+/*DATAGRID
+-------------------------------------------------------------------------------------------------*/
 
-/*#datacard {
+#datacard {
     border-color: #21252977;
 }
 
@@ -169,6 +142,19 @@ footer {
         opacity: 1;
     }
 }
+
 .fadeIn {
     animation: fadeIn 1s ease-out;
-}*/
+}
+
+.ag-row.reserva-en-curso {
+    background-color: #3f33;
+}
+
+.ag-row.reserva-finalizada {
+    background-color: #3333;
+}
+
+.ag-row.reserva-atrasada {
+    background-color: #f333;
+}

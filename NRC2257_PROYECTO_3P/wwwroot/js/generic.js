@@ -144,3 +144,19 @@ function swalAlert(icon, title, text) {
         confirmButtonColor: '#777'
     });
 }
+
+function getDate(cellValue) {
+    const [day, month, year] = cellValue.split(" ")[0].split("/").map(Number);
+    return new Date(year, month - 1, day);
+}
+
+function formattedDate(cellValue) {
+    const date = getDate(cellValue);
+    let weekday = date.toLocaleDateString("es-ES", { weekday: 'long' });
+    weekday = weekday[0].toUpperCase() + weekday.slice(1);
+    let day = date.toLocaleDateString("es-ES", { day: '2-digit' });
+    let month = date.toLocaleDateString("es-ES", { month: 'short' });
+    month = month[0].toUpperCase() + month.slice(1);
+    let year = date.getFullYear();
+    return `${weekday}, ${day}-${month}-${year}`;
+}
