@@ -1,14 +1,5 @@
 ﻿navbarActive('#empleadoIndex');
 
-//let config = {
-//    headers: ['#', 'Nombre', 'Apellido', 'Cargo', 'Teléfono', 'Email'],
-//    properties: ['id', 'nombre', 'apellido', 'cargo', 'telefono', 'email'],
-//    identificator: 'id',
-//    editable: true,
-//    deletable: true,
-//    creatable: true
-//};
-
 const gridOptions = {
     pagination: true,
     paginationPageSize: 10,
@@ -84,27 +75,6 @@ function renderGrid() {
             window.gridApi.updateGridOptions({ rowData: res });
         });
 }
-
-//function renderTable() {
-//    if (getValue('nombre-input') === '')
-//        list();
-//    else
-//        filter();
-//}
-
-//async function list() {
-//    config.url = 'Empleado/listar';
-//    config.method = 'get';
-//    createTable(config);
-//}
-
-//async function filter() {
-//    let form = new FormData(document.getElementById('search-form'));
-//    config.url = 'Empleado/filtrar';
-//    config.method = 'post';
-//    createTable(config, form);
-//}
-
 
 async function update(id) {
     fetchGet('Empleado/recuperar?id=' + id, 'json', res => {

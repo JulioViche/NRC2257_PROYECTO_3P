@@ -1,42 +1,67 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Registro de Vehículos";
 }
+
+<div id="save-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-label" class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form" method="post" class="row">
+                    <div id="modal-id-group" class="col-2 mb-2">
+                        <label class="col-form-label mb-0">Id:</label>
+                        <input id="id-input" class="form-control" name="Id" type="text" placeholder="?" contenteditable="false" required readonly>
+                    </div>
+                    <div class="col-10 mb-2">
+                        <label class="col-form-label mb-0">Marca:</label>
+                        <input id="marca-input" class="form-control" name="Marca" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Modelo:</label>
+                        <input id="modelo-input" class="form-control" name="Modelo" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Año:</label>
+                        <input id="año-input" class="form-control" name="Año" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Precio:</label>
+                        <input id="precio-input" class="form-control" name="Precio" type="text" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary w-100" onclick="save()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <h1>Búsqueda de Vehículos</h1>
 
 <fieldset class="row mt-3">
-    <form id="search-form" method="post" class="col-md-9 col-12 row">
-        <div class="col-3 mb-2">
-            <input id="email-input" class="form-control" name="marca" type="text" placeholder="Marca">
+    <form id="global-filter-form" method="post" class="col-md-9 col-12 row">
+        <div class="col mb-2">
+            <input id="global-filter" class="form-control" type="text" placeholder="Buscar..." onkeyup="renderGrid()">
         </div>
-        <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="modelo" type="text" placeholder="Modelo">
-        </div>
-        <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="año" type="text" placeholder="Año">
-        </div>
-        <div class="col-3 mb-2">
-            <input id="email-input" class="form-control" name="precio" type="number" placeholder="Precio">
-        </div>
-        <div class="col-9 mb-2">
-            <input id="name-input" class="form-control" name="tiposeguro" type="text" placeholder="Estado">
-        </div>
-
     </form>
     <div class="col row">
         <div class="col-6 mb-2">
-            <button class="btn btn-primary w-100" onclick="search()">Buscar</button>
+            <button class="btn btn-danger w-100" onclick="resetGlobalFilter()">Limpiar</button>
         </div>
         <div class="col-6 mb-2">
-            <button class="btn btn-danger w-100" onclick="resetForm()">Limpiar</button>
+            <button class="btn btn-success w-100" onclick="create()">Nuevo</button>
         </div>
     </div>
 </fieldset>
 
 <hr>
 
-<div id="datatable-container" class="d-flex justify-content-center w-100"></div>
+<div id="datagrid"></div>
 
 @section Scripts {
     <script src="~/js/vehiculo.js"></script>
