@@ -208,3 +208,72 @@ function swalAlert(icon, title, text) {
 //    content += '</tbody>';
 //    return content;
 //}
+
+//function Confirmacion(titulo = "Confirmacion", texto = "Desasea guardar los cambios?", callback) {
+//    Swal.fire({
+//        title: titulo,
+//        text: texto,
+//        icon: "warning",
+//        showCancelButton: true,
+//        confirmButtonColor: "#3085d6",
+//        cancelButtonColor: "#d33",
+//        confirmButtonText: "SI",
+//        cancelButtonText: "NO"
+//    }).then((result) => {
+//        if (result.isConfirmed) {
+//            callback()
+//        }
+//    });
+//}
+
+function Exito()
+{
+    Swal.fire({
+        title: "Acción Correcta",
+        icon: "success",
+        draggable: true
+    });
+}
+
+//function Exito() {
+//    toastr.options = {
+//        //"closeButton": false,
+//        //"debug": false,
+//        //"newestOnTop": false,
+//        //"progressBar": false,
+//        //"positionClass": "toast-top-right",
+//        //"preventDuplicates": false,
+//        //"onclick": null,
+//        "showDuration": "300",
+//        //"hideDuration": "1000",
+//        "timeOut": "1000",
+//        "extendedTimeOut": "1000",
+//        "showEasing": "swing",
+//        "hideEasing": "linear",
+//        "showMethod": "fadeIn",
+//        "hideMethod": "fadeOut"
+//    }
+//    toastr.success('Acción Exitosa');
+//}
+
+function ErrorG() {
+    console.log("llamado a la funcion ErrorG")
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-full-width",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    toastr.error("Algo ocurrió. Inténtalo de nuevo.");
+} 

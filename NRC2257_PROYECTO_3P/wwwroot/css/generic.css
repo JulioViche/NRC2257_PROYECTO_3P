@@ -1,4 +1,4 @@
-﻿body {
+﻿/*body {
     display: flex;
     margin: 0;
 }
@@ -9,12 +9,12 @@
 
 footer {
     display: none;
-}
+}*/
 
 /*DATATABLES*/
 /*-------------------------------------------------------------------------------------------------*/
 
-#datatable tr i {
+/*#datatable tr i {
     color: #7775;
 }
 
@@ -36,12 +36,12 @@ footer {
 
 #datatable tr.create:hover i {
     color: inherit;
-}
+}*/
 
 /*NAVBAR*/
 /*-------------------------------------------------------------------------------------------------*/
 
-#accordian {
+/*#accordian {
     background-color: #212529;
     width: 200px;
     padding: 90px 0 10px 0;
@@ -143,12 +143,12 @@ footer {
 .selector-active .bottom:before {
     bottom: -25px;
     left: -25px;
-}
+}*/
 
 /*DATAGRID*/
 /*-------------------------------------------------------------------------------------------------*/
 
-#datacard {
+/*#datacard {
     border-color: #21252977;
 }
 
@@ -171,4 +171,4 @@ footer {
 }
 .fadeIn {
     animation: fadeIn 1s ease-out;
-}
+}*/

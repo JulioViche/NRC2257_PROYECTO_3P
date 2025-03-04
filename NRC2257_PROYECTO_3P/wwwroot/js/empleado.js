@@ -105,6 +105,7 @@ function renderGrid() {
 //    createTable(config, form);
 //}
 
+
 async function update(id) {
     fetchGet('Empleado/recuperar?id=' + id, 'json', res => {
         setValue('id-input', res.id);
@@ -127,6 +128,7 @@ async function create() {
     document.getElementById('modal-id-group').style.display = 'none';
     $('#save-modal').modal('show');
 }
+
 
 async function save() {
     const form = new FormData(document.getElementById('modal-form'));
