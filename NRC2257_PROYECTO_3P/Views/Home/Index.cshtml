@@ -22,8 +22,8 @@
     </div>
 
     <!-- Separador / Espacio entre secciones -->
-    <div class="py-12 bg-white dark:bg-gray-800">
-        <div class="container mx-auto px-6">
+    <div class="bg-white dark:bg-gray-800">
+        
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
             <!-- Fondo azul degradado -->
             <defs>
@@ -72,11 +72,12 @@
             <text x="470" y="195" font-family="Arial, sans-serif" font-size="12" fill="white">Lunes a Viernes.</text>
 
             <!-- Botón de registro -->
-            <rect x="80" y="245" width="230" height="40" rx="20" fill="#F5E630" />
-            <text x="195" y="270" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="black" text-anchor="middle">Comience Pujar! »</text>
-s            
+            <g cursor="pointer" onclick="registerButtonClick()">
+                <rect x="80" y="245" width="230" height="40" rx="20" fill="#F5E630" />
+                <text x="195" y="270" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="black" text-anchor="middle">Comience Pujar! »</text>
+           <g/>
         </svg>
-        </div>
+       
     </div>
 
 
@@ -196,4 +197,12 @@ s
 
 @section Scripts {
     <script src="~/js/home.js"></script>
+
+    <script>
+        function registerButtonClick() {
+            alert('¡Botón de registro clickeado!');
+            // Aquí puedes agregar más acciones, como redirigir a otra página:
+            // window.location.href = "https://example.com/register";
+        }
+    </script>
 }
