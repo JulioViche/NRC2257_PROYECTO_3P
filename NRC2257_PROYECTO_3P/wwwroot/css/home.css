@@ -1,0 +1,17 @@
+﻿.card-carousel {
+    scroll-behavior: smooth;
+}
+
+.image-carousel {
+    scroll-behavior: smooth;
+}
+
+/* Ocultar scrollbars pero mantener la funcionalidad */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
