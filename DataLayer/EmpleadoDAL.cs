@@ -45,13 +45,13 @@ namespace DataLayer
             return lista;
         }
 
-        public static List<EmpleadoCLS> Filtrar(string nombre)
+        public static List<EmpleadoCLS> Filtrar(string filtro)
         {
             List<EmpleadoCLS> lista = new();
             DBConnection.ExecuteQuery("spFiltrarEmpleados", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nombre", nombre); 
+                cmd.Parameters.AddWithValue("@filtro", filtro); 
                 lista = Leer(cmd.ExecuteReader());
             });
             return lista;

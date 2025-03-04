@@ -16,9 +16,9 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return EmpleadoBL.Listar();
         }
          
-        public List<EmpleadoCLS> Filtrar(string nombre)
+        public List<EmpleadoCLS> Filtrar(string filtro)
         {
-            return EmpleadoBL.Filtrar(nombre);
+            return EmpleadoBL.Filtrar(filtro);
         }
 
         public int Guardar(EmpleadoCLS empleado)

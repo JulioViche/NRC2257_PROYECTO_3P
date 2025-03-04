@@ -10,9 +10,9 @@ namespace BusinessLayer
             return EmpleadoDAL.Listar();
         }
 
-        public static List<EmpleadoCLS> Filtrar(string nombre)
+        public static List<EmpleadoCLS> Filtrar(string filtro)
         {
-            return EmpleadoDAL.Filtrar(nombre);
+            return EmpleadoDAL.Filtrar(filtro);
 
         }
 

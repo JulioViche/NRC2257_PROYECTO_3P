@@ -1,5 +1,6 @@
 ﻿body {
     display: flex;
+    margin: 0;
 }
 
 .container {
@@ -7,7 +8,6 @@
 }
 
 footer {
-    position: fixed;
     display: none;
 }
 
@@ -145,7 +145,6 @@ footer {
     left: -25px;
 }
 
-
 /*DATAGRID*/
 /*-------------------------------------------------------------------------------------------------*/
 
@@ -154,9 +153,22 @@ footer {
 }
 
 #datagrid {
-    height: 500px;
+    height: 480px;
 }
 
 .ag-root-wrapper {
     border: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+.fadeIn {
+    animation: fadeIn 1s ease-out;
 }
