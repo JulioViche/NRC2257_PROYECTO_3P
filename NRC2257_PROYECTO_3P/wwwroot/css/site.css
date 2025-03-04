@@ -124,8 +124,13 @@ html:not(.dark) #accordian ul li a.active {
    
 }
 
-#accordian > ul > li.active > a {
-    color: var(--nav-bg);
+html:not(.dark) #accordian > ul > li.active > a {
+    color: var(--accent-color); /* O cualquier color oscuro que contraste bien */
+    background-color: transparent;
+}
+
+html.dark #accordian > ul > li.active > a {
+    color: var(--accent-color); /* O blanco (#ffffff) para mayor contraste */
     background-color: transparent;
 }
 
