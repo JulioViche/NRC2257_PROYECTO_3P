@@ -22,3 +22,5 @@ nextCardBtn.addEventListener('click', () => {
 prevCardBtn.addEventListener('click', () => {
     cardCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
 });
+
+

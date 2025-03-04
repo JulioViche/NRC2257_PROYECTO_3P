@@ -1,5 +1,7 @@
 ﻿.card-carousel {
     scroll-behavior: smooth;
+  
+    overflow-x: auto;
 }
 
 .image-carousel {
@@ -14,4 +16,37 @@
 .hide-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .card {
+        width: 90%; /* Hacer que las tarjetas sean más grandes en pantallas pequeñas */
+        max-width: 300px; /* Ajustar el tamaño máximo en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%; /* Ocupa todo el ancho disponible en pantallas muy pequeñas */
+        max-width: 100%; /* Elimina cualquier límite de ancho */
+    }
+}
+    
+
+
+/* Hover Membresías */
+.flex-1:hover {
+    transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 15px #00FFFF; /* Azul neón con resplandor */
+    outline: none;
+    border: 2px solid #00FFFF; /* Azul neón */
+}
+
+.flex-1:focus-visible {
+    outline: none;
+    border: 2px solid #00FFFF; /* Azul neón al tener foco */
+    box-shadow: 0 0 15px #00FFFF; /* Azul neón con resplandor */
 }
