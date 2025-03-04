@@ -10,9 +10,9 @@ namespace BusinessLayer
             return ClienteDAL.Listar();
         }
 
-        public static List<ClienteCLS> Filtrar(string nombre)
+        public static List<ClienteCLS> Filtrar(string filtro)
         {
-            return ClienteDAL.Filtrar(nombre);
+            return ClienteDAL.Filtrar(filtro);
         }
 
         public static ClienteCLS Recuperar(int id)

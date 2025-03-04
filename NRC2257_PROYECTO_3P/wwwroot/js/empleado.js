@@ -1,13 +1,13 @@
 ﻿navbarActive('#empleadoIndex');
 
-let config = {
-    headers: ['#', 'Nombre', 'Apellido', 'Cargo', 'Teléfono', 'Email'],
-    properties: ['id', 'nombre', 'apellido', 'cargo', 'telefono', 'email'],
-    identificator: 'id',
-    editable: true,
-    deletable: true,
-    creatable: true
-};
+//let config = {
+//    headers: ['#', 'Nombre', 'Apellido', 'Cargo', 'Teléfono', 'Email'],
+//    properties: ['id', 'nombre', 'apellido', 'cargo', 'telefono', 'email'],
+//    identificator: 'id',
+//    editable: true,
+//    deletable: true,
+//    creatable: true
+//};
 
 const gridOptions = {
     pagination: true,
@@ -17,102 +17,103 @@ const gridOptions = {
         {
             headerName: 'ID',
             field: 'id',
+            width: 75,
             resizable: false,
-            width: 100,
             sort: "asc"
         },
         {
             headerName: 'Nombre',
             field: 'nombre',
-            minWidth: 150,
+            minWidth: 100,
+            flex: 1,
             filter: true
         },
         {
             headerName: 'Apellido',
             field: 'apellido',
-            minWidth: 150,
+            minWidth: 100,
+            flex: 1,
             filter: true
         },
         {
             headerName: 'Cargo',
             field: 'cargo',
-            resizable: false,
-            width: 100
+            width: 100,
+            resizable: false
         },
         {
             headerName: 'Teléfono',
             field: 'telefono',
-            minWidth: 100
+            width: 125,
+            resizable: false
         },
         {
             headerName: 'Email',
             field: 'email',
             minWidth: 200,
+            flex: 1,
             filter: true
-        }
+        },
+        operationsColumn({
+            editable: true,
+            deletable: true
+        })
     ],
-    onGridReady: params => {
-        gridOptions.api = params.api;
+    onGridReady: options => {
+        window.gridApi = options.api;
+        renderGrid();
+    },
+    onFirstDataRendered: () => {
+        const rows = document.querySelectorAll('.ag-row');
+        rows.forEach(row => {
+            row.classList.add('fadeIn');
+        });
     }
 };
 
-window.onload = () => {
-    renderGrid();
-    agGrid.createGrid(document.querySelector('#datagrid'), gridOptions);
-}
+const gridDiv = document.getElementById('datagrid');
+const grid = agGrid.createGrid(gridDiv, gridOptions);
 
 function renderGrid() {
-    console.log(!$('#nombre-input').val());
-    if (!$('#nombre-input').val())
+    if (!getValue('global-filter'))
         fetchGet('Empleado/listar', 'json', res => {
-            gridOptions.rowData = res;
-            console.log(res);
-            recreateGrid();
+            window.gridApi.updateGridOptions({ rowData: res });
         });
     else
-        fetchGet('Empleado/filtrar?nombre=' + $('#nombre-input').val(),'json', res => {
-            gridOptions.rowData = Array.isArray(res) ? res : [res];
-            console.log(res);
-            recreateGrid();
+        fetchGet('Empleado/filtrar?filtro=' + getValue('global-filter'),'json', res => {
+            window.gridApi.updateGridOptions({ rowData: res });
         });
 }
 
-function recreateGrid() {
-    const gridDiv = document.querySelector('#datagrid');
-    gridDiv.innerHTML = '';
-    new agGrid.createGrid(gridDiv, gridOptions);
-}
+//function renderTable() {
+//    if (getValue('nombre-input') === '')
+//        list();
+//    else
+//        filter();
+//}
 
-function renderTable() {
-    if (getValue('nombre-input') === '')
-        list();
-    else
-        filter();
-}
+//async function list() {
+//    config.url = 'Empleado/listar';
+//    config.method = 'get';
+//    createTable(config);
+//}
 
-async function list() {
-    config.url = 'Empleado/listar';
-    config.method = 'get';
-    createTable(config);
-}
-
-
-async function filter() {
-    let form = new FormData(document.getElementById('search-form'));
-    config.url = 'Empleado/filtrar';
-    config.method = 'post';
-    createTable(config, form);
-}
+//async function filter() {
+//    let form = new FormData(document.getElementById('search-form'));
+//    config.url = 'Empleado/filtrar';
+//    config.method = 'post';
+//    createTable(config, form);
+//}
 
 
 async function update(id) {
     fetchGet('Empleado/recuperar?id=' + id, 'json', res => {
-        setValue('modal-id-input', res.id);
-        setValue('modal-nombre-input', res.nombre);
-        setValue('modal-apellido-input', res.apellido);
-        setValue('modal-cargo-input', res.cargo);
-        setValue('modal-telefono-input', res.telefono);
-        setValue('modal-email-input', res.email);
+        setValue('id-input', res.id);
+        setValue('nombre-input', res.nombre);
+        setValue('apellido-input', res.apellido);
+        setValue('cargo-input', res.cargo);
+        setValue('telefono-input', res.telefono);
+        setValue('email-input', res.email);
     });
     document.getElementById('modal-label').textContent = 'Editar Empleado';
     document.getElementById('modal-id-group').style.display = 'block';
@@ -122,7 +123,7 @@ async function update(id) {
 
 async function create() {
     document.getElementById('modal-form').reset();
-    setValue('modal-id-input', 0);
+    setValue('id-input', 0);
     document.getElementById('modal-label').textContent = 'Crear Empleado';
     document.getElementById('modal-id-group').style.display = 'none';
     $('#save-modal').modal('show');
@@ -130,32 +131,38 @@ async function create() {
 
 
 async function save() {
-    let form = new FormData(document.getElementById('modal-form'));
+    const form = new FormData(document.getElementById('modal-form'));
     fetchPost('Empleado/guardar', 'text', form, res => {
-        renderTable();
-        if (parseInt(res)) $('#save-modal').modal('hide');
-        else alert('Error al guardar');
+        if (parseInt(res)) {
+            $('#save-modal').modal('hide');
+            renderGrid();
+            toastr.success('', 'Cambios guardados con éxito.');
+        } else {
+            swalAlert('error', 'Ups...', 'Algo ha salido mal');
+            toastr.error('Error al guardar en la base de datos', 'ERROR');
+        }
     });
 }
 
+async function remove(id, rowIndex) {
+    const rowNode = window.gridApi.getRowNode(rowIndex);
+    const nombre = rowNode ? rowNode.data.nombre + ' ' + rowNode.data.apellido : 'UK';
 
-async function remove(id) {
-    fetchGet('Empleado/Recuperar?id=' + id, 'json', res => {
-        let Nombre = res.nombre;
-
-        Confirmacion(undefined, "¿Desea eliminar: " + Nombre + "?", function () {
-            fetchGet('Empleado/Eliminar?id=' + id, 'text', res => {
-                Exito(); ErrorG();
-                renderTable();
-                if (!parseInt(res)) alert('Error al eliminar');
-            });
+    swalConfirmDelete('warning', '¿Está seguro de eliminar el registro del empleado ' + nombre + '?', () => {
+        fetchGet('Empleado/eliminar?id=' + id, 'text', res => {
+            if (parseInt(res)) {
+                renderGrid();
+                swalAlert('success', 'Eliminado', 'El registro ha sido eliminado');
+                toastr.success('El registro ha sido eliminado', 'Eliminado');
+            } else {
+                swalAlert('error', 'Ups...', 'Algo ha salido mal');
+                toastr.error('Error al eliminar en la base de datos', 'ERROR');
+            }
         });
     });
-} 
+}
 
-
-function resetForm() {
-    document.getElementById('search-form').reset();
-    renderTable();
+function resetGlobalFilter() {
+    document.getElementById('global-filter-form').reset();
     renderGrid();
 }

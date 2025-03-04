@@ -42,12 +42,13 @@ namespace DataLayer
             return lista;
         }
 
-        public static List<ClienteCLS> Filtrar(string nombre)
+        public static List<ClienteCLS> Filtrar(string filtro)
         {
             List<ClienteCLS> lista = null;
             DBConnection.ExecuteQuery("spFiltrarClientes", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@filtro", filtro);
                 lista = Leer(cmd.ExecuteReader());
             });
             return lista;

@@ -21,9 +21,9 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return ClienteBL.Listar();
         }
 
-        public List<ClienteCLS> Filtrar(string nombre)
+        public List<ClienteCLS> Filtrar(string filtro)
         {
-            return ClienteBL.Filtrar(nombre);
+            return ClienteBL.Filtrar(filtro);
         }
 
         public ClienteCLS Recuperar(int id)
