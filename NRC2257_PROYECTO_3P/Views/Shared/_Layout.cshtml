@@ -18,7 +18,6 @@
 
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
     <header>
-
         <div class="container mx-auto p-4">
             <button id="theme-toggle" class="bg-blue-500 dark:bg-blue-700 text-white p-3 rounded-full shadow hover:shadow-lg transition duration-300">
                 <!-- Icono de sol (visible en modo oscuro) -->
@@ -62,18 +61,13 @@
                 </li>
             </ul>
         </div>
-
-
     </header>
 
     <input type="hidden" id="root" value="@Url.Content("~")" />
 
-
-
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-           
         </main>
     </div>
 
