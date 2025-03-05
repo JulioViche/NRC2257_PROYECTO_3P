@@ -7,8 +7,8 @@
         public int VehiculoId { get; set; }
         public string Cliente { get; set; }
         public string Vehiculo { get; set; }
-        public string FechaInicio { get; set; }
-        public string FechaFin { get; set; }
+        public DateOnly FechaInicio { get; set; }
+        public DateOnly FechaFin { get; set; }
         public string Estado { get; set; }
     }
 }
