@@ -110,7 +110,7 @@ function renderClienteOptions() {
 
 function renderVehiculoOptions() {
     let vehiculoInput = document.getElementById('vehiculo-input');
-    let url = getValue('vehiculo-filter') ? 'Vehiculo/filtrar?filtro=Disponible ' + getValue('vehiculo-filter') : 'Vehiculo/listar';
+    let url = getValue('vehiculo-filter') ? 'Vehiculo/filtrar?filtro=Disponible ' + getValue('vehiculo-filter') : 'Vehiculo/filtrar?filtro=Disponible';
     let text = getValue('vehiculo-filter') ? '' : '<option value="0">Selecciona un vehículo</option>';
     fetchGet(url, 'json', res => {
         vehiculoInput.innerHTML = text;
