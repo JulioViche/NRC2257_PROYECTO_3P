@@ -40,15 +40,27 @@
 
                 <hr>
 
-                @*<form id="seguro-modal-form" method="post" class="row">
+                <form id="seguro-modal-form" method="post" class="row">
                     <div class="col-12 mb-2">
-                        <input id="reserva-input" class="form-select" name="ReservaId" type="text" required hidden>
+                        <input id="reserva-input" class="form-select" name="ReservaId" type="text" value="0" required hidden>
                     </div>
                     <div class="col-12 mb-2">
                         <label class="col-form-label mb-0">Tipo de seguro:</label>
                         <select id="seguro-input" class="form-select" name="TipoSeguro" required></select>
                     </div>
-                </form>*@
+                </form>
+
+                <hr>
+
+                <form id="pago-modal-form" method="post" class="row">
+                    <div class="col-12 mb-2">
+                        <input id="reserva-input" class="form-select" name="ReservaId" type="text" value="0" required hidden>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label class="col-form-label mb-0">Método de Pago:</label>
+                        <select id="pago-input" class="form-select" name="MetodoPago" required></select>
+                    </div>
+                </form>
 
             </div>
             <div class="modal-footer">

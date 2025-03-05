@@ -74,12 +74,7 @@ const gridDiv = document.getElementById('datagrid');
 const grid = agGrid.createGrid(gridDiv, gridOptions);
 
 function renderGrid() {
-    //if (!getValue('global-filter'))
     fetchGet('Pago/listar', 'json', res => {
         window.gridApi.updateGridOptions({ rowData: res });
     });
-    //else
-    //    fetchGet('Reserva/filtrar?filtro=' + getValue('global-filter'), 'json', res => {
-    //        window.gridApi.updateGridOptions({ rowData: res });
-    //    });
 }

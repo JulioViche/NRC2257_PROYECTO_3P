@@ -45,7 +45,7 @@ function createOperationButton(title, bscolor, faicon, callback) {
     return btn;
 }
 
-// Columna de operaciones de AG Grid (Editar, Eliminar, Finalizar, Cancelar, Asegurar, Pago)
+// Columna de operaciones de AG Grid (Editar, Eliminar, Finalizar, Asegurar, Pago)
 function operationsColumn(config) {
     return {
         headerName: '',
@@ -87,40 +87,47 @@ function operationsColumn(config) {
                 container.appendChild(finalizeBtn);
             }
 
-            if (config.cancelable) {
-                let cancelBtn
-                if (options.data.estado == 'Confirmada' || options.data.estado == 'Pendiente') {
-                    cancelBtn = createOperationButton('Cancelar', 'text-secondary', '<i class="fa-solid fa-ban"></i>', () => {
-                        cancel(options.data.id);
-                    });
-                } else if (options.data.estado == 'Cancelada') {
-                    cancelBtn = createOperationButton('Cancelado', 'text-secondary', '<i class="fa-solid fa-ban"></i>', () => { });
-                    cancelBtn.style.cursor = 'default';
-                } else {
-                    cancelBtn = createOperationButton('', 'text-transparent', '<i class="fa-solid fa-ban"></i>', () => { });
-                    cancelBtn.style.cursor = 'default';
-                }
-                container.appendChild(cancelBtn);
-            }
+            if (config.seguro) {
+                let asegurado = false;
+                let seguroBtn = document.createElement('a');
 
-            if (config.createSeguro) {
-                const seguroBtn = createOperationButton('Asegurar', 'text-secondary', '<i class="fa-solid fa-lock"></i>', () => {
-                    createSeguro(options.data.id);
-                });
+                fetchGet('Seguro/listar', 'json', res => {
+                    for (obj of res)
+                        if (obj.reservaId == options.data.id) asegurado = true;
+
+                    if (asegurado)
+                        seguroBtn = createOperationButton('Asegurado', 'text-primary', '<i class="fa-solid fa-lock"></i>', () => {
+                            mostrarSeguro();
+                        });
+                    else {
+                        seguroBtn = createOperationButton('Sin seguro', 'text-secondary', '<i class="fa-solid fa-lock"></i>', () => { });
+                        seguroBtn.style.cursor = 'default';
+                    }
+
                 container.appendChild(seguroBtn);
+                });
+
             }
 
             if (config.createPago) {
-                let pagoBtn;
-                if (options.data.estado == 'Pendiente') {
-                    pagoBtn = createOperationButton('Añadir pago', 'text-secondary', '<i class="fa-solid fa-wallet"></i>', () => {
-                        createPago(options.data.id);
-                    });
-                } else {
-                    pagoBtn = createOperationButton('Pagada', 'text-warning', '<i class="fa-solid fa-wallet"></i>', () => {});
-                    pagoBtn.style.cursor = 'default';
-                }
+                let pagado = false;
+                let pagoBtn = document.createElement('a');
+
+                fetchGet('Pago/listar', 'json', res => {
+                    for (obj of res)
+                        if (obj.reservaId == options.data.id) pagado = true;
+
+                    if (pagado)
+                        pagoBtn = createOperationButton('Pagado', 'text-primary', '<i class="fa-solid fa-wallet"></i>', () => {
+                            mostrarPago();
+                        });
+                    else {
+                        pagoBtn = createOperationButton('Pendiente', 'text-secondary', '<i class="fa-solid fa-wallet"></i>', () => {});
+                        pagoBtn.style.cursor = 'default';
+                    }
                 container.appendChild(pagoBtn);
+                });
+
             }
 
             return container;

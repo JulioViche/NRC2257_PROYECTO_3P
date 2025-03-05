@@ -55,10 +55,9 @@ const gridOptions = {
             resizable: false
         },
         operationsColumn({
-            createSeguro: true,
+            seguro: true,
             createPago: true,
-            finalizable: true,
-            cancelable: true
+            finalizable: true
         })
     ],
     onGridReady: options => {
@@ -123,18 +122,28 @@ function renderVehiculoOptions() {
     });
 }
 
-//function renderTipoSeguro() {
-//    let seguroInput = document.getElementById('seguro-input');
-//    fetchGet('Seguro/listarTiposSeguro', 'json', res => {
-//        seguroInput.innerHTML = '<option value = "">Ninguno</option>';
-//        for (let obj of res) {
-//            let option = document.createElement('option');
-//            option.value = obj;
-//            option.textContent = obj;
-//            seguroInput.appendChild(option);
-//        }
-//    });
-//}
+function renderTipoSeguro() {
+    let seguroInput = document.getElementById('seguro-input');
+    fetchGet('Seguro/listarTiposSeguro', 'json', res => {
+        seguroInput.innerHTML = '<option value = "">Ninguno</option>';
+        for (let obj of res) {
+            let option = document.createElement('option');
+            option.value = obj;
+            option.textContent = obj;
+            seguroInput.appendChild(option);
+        }
+    });
+}
+
+function renderMetodoPago() {
+    let seguroInput = document.getElementById('pago-input');
+    for (let obj of ['Efectivo', 'Tarjeta']) {
+        let option = document.createElement('option');
+        option.value = obj;
+        option.textContent = obj;
+        seguroInput.appendChild(option);
+    }
+}
 
 function create() {
     document.getElementById('modal-form').reset();
@@ -144,12 +153,17 @@ function create() {
     $('#save-modal').modal('show');
     renderClienteOptions();
     renderVehiculoOptions();
+    renderTipoSeguro();
+    renderMetodoPago();
 }
 
 function save() {
-    const form = new FormData(document.getElementById('modal-form'));
-    fetchPost('Reserva/guardar', 'text', form, res => {
+    let reservaForm = new FormData(document.getElementById('modal-form'));
+    fetchPost('Reserva/guardar', 'text', reservaForm, res => {
         if (parseInt(res)) {
+            console.log(parseInt(res))
+            saveSeguro(parseInt(res));
+            savePago(parseInt(res));
             $('#save-modal').modal('hide');
             renderGrid();
             toastr.success('', 'Cambios guardados con éxito.');
@@ -160,8 +174,29 @@ function save() {
     });
 }
 
-function createSeguro(id) {
+function saveSeguro(id) {
+    let seguroForm = new FormData(document.getElementById('seguro-modal-form'));
+    seguroForm.set('Id', 0);
+    seguroForm.set('ReservaId', id);
+    seguroForm.set('Costo', 100);
+    fetchPost('Seguro/guardar', 'text', seguroForm, res => {});
+}
 
+function savePago(id) {
+    let pagoForm = new FormData(document.getElementById('pago-modal-form'));
+    pagoForm.set('Id', 0);
+    pagoForm.set('FechaPago', new Date().toISOString().split('T')[0]);
+    pagoForm.set('Monto', 200);
+    pagoForm.set('ReservaId', id);
+    fetchPost('Pago/guardar', 'text', pagoForm, res => { });
+}
+
+function mostrarSeguro() {
+    window.location.href = 'Seguro/Index';
+}
+
+function mostrarPago() {
+    window.location.href = 'Pago/Index';
 }
 
 function resetGlobalFilter() {

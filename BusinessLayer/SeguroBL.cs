@@ -47,7 +47,5 @@ namespace BusinessLayer
         {
             return SeguroDAL.Guardar(seguro);
         }
-
-
     }
 }
