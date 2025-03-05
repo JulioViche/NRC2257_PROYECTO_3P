@@ -20,6 +20,11 @@ namespace BusinessLayer
             return ClienteDAL.Recuperar(id);
         }
 
+        public static int RecuperarId(string email)
+        {
+            return ClienteDAL.RecuperarId(email);
+        }
+
         public static int Guardar(ClienteCLS cliente)
         {
             return ClienteDAL.Guardar(cliente);

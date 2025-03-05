@@ -66,6 +66,18 @@ namespace DataLayer
             return cliente;
         }
 
+        public static int RecuperarId(string email)
+        {
+            int id = 0;
+            DBConnection.ExecuteQuery("spRecuperarIdClientePorEmail", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@email", email);
+                id = Convert.ToInt32(cmd.ExecuteScalar());
+            });
+            return id;
+        }
+
         public static int Guardar(ClienteCLS cliente)
         {
             int res = 0;
