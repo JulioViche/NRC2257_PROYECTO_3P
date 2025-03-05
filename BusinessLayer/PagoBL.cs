@@ -10,4 +10,10 @@ namespace BusinessLayer
             return PagoDAL.Listar();
         }
     }
-}
+
+    public static int Guardar(PagoCLS pago)
+        {
+            return PagoDAL.Guardar(pago);
+        }
+
+    }

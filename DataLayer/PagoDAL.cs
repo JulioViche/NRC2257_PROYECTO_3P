@@ -61,5 +61,22 @@ namespace DataLayer
             });
             return pago;
         }
+
+        public static int Guardar(PagoCLS pago)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("uspGuardarPago", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ReservaId", pago.ReservaId);
+                cmd.Parameters.AddWithValue("@MetodoPago", pago.MetodoPago);
+                cmd.Parameters.AddWithValue("@Monto", pago.Monto);
+                cmd.Parameters.AddWithValue("@FechaPago", pago.FechaPago);
+                res = Convert.ToInt32(cmd.ExecuteScalar());
+            });
+            return res;
+        }
+
+
     }
 }

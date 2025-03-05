@@ -216,12 +216,15 @@ function procesarSeguro() {
 //}
 async function procesarPago() {
     try {
+        // Show loading indicator
+        swalLoading('Procesando transacción...');
+
         const userData = JSON.parse(localStorage.getItem('userData'));
         const reservationData = JSON.parse(localStorage.getItem('reservationData'));
         const seguroData = JSON.parse(localStorage.getItem('seguroData'));
         const metodoPago = document.getElementById('metodo-pago').value;
 
-        // 1. Save Cliente first to get the ID
+        // 1. Save Cliente
         const clienteForm = new FormData();
         clienteForm.append('Id', 0);
         clienteForm.append('Nombre', userData.Nombre);
@@ -232,66 +235,66 @@ async function procesarPago() {
         const clienteId = await new Promise((resolve, reject) => {
             fetchPost('Cliente/guardar', 'text', clienteForm, res => {
                 resolve(parseInt(res));
-            });
+            }, error => reject(error));
         });
 
-        if (!clienteId) throw new Error('Error creating client');
+        if (!clienteId) throw new Error('Error al crear cliente');
 
-        // 2. Create Reserva with the new ClienteId
+        // 2. Create Reserva
         const reservaForm = new FormData();
         reservaForm.append('Id', 0);
         reservaForm.append('ClienteId', clienteId);
         reservaForm.append('VehiculoId', reservationData.VehiculoId);
-        reservaForm.append('FechaInicio', reservationData['fecha-inicial']);
-        reservaForm.append('FechaFin', reservationData['fecha-final']);
+        reservaForm.append('FechaInicio', reservationData.FechaInicio);
+        reservaForm.append('FechaFin', reservationData.FechaFin);
 
         const reservaId = await new Promise((resolve, reject) => {
             fetchPost('Reserva/guardar', 'text', reservaForm, res => {
                 resolve(parseInt(res));
-            });
+            }, error => reject(error));
         });
 
-        if (!reservaId) throw new Error('Error creating reservation');
+        if (!reservaId) throw new Error('Error al crear reserva');
 
-        // 3. Create Seguro with ReservaId
+        // 3. Create Seguro
         const seguroForm = new FormData();
         seguroForm.append('ReservaId', reservaId);
-        seguroForm.append('TipoSeguro', seguroData.tipo);
-        seguroForm.append('Costo', parseFloat(seguroData.costo.replace('$', '')));
+        seguroForm.append('TipoSeguro', seguroData.TipoSeguro);
+        seguroForm.append('Costo', seguroData.Costo);
 
         const seguroId = await new Promise((resolve, reject) => {
             fetchPost('Seguro/guardar', 'text', seguroForm, res => {
                 resolve(parseInt(res));
-            });
+            }, error => reject(error));
         });
 
-        if (!seguroId) throw new Error('Error creating insurance');
+        if (!seguroId) throw new Error('Error al crear seguro');
 
-        // 4. Create Pago with ReservaId
+        // 4. Create Pago
         const pagoForm = new FormData();
         pagoForm.append('ReservaId', reservaId);
         pagoForm.append('MetodoPago', metodoPago);
-        pagoForm.append('Monto', parseFloat(seguroData.costo.replace('$', '')));
+        pagoForm.append('Monto', seguroData.Costo);
         pagoForm.append('FechaPago', new Date().toISOString());
 
         const pagoId = await new Promise((resolve, reject) => {
             fetchPost('Pago/guardar', 'text', pagoForm, res => {
                 resolve(parseInt(res));
-            });
+            }, error => reject(error));
         });
 
-        if (!pagoId) throw new Error('Error creating payment');
+        if (!pagoId) throw new Error('Error al crear pago');
 
-        // Clear localStorage after successful transaction
+        // Clear storage and show success
         localStorage.removeItem('userData');
         localStorage.removeItem('reservationData');
         localStorage.removeItem('seguroData');
 
         $('#payment-modal').modal('hide');
-        swalAlert('success', undefined, '¡Reserva completada con éxito!');
+        swalAlert('success', '¡Éxito!', 'Transacción completada correctamente');
 
     } catch (error) {
-        console.error('Error in transaction:', error);
+        console.error('Error en la transacción:', error);
         swalAlert('error', 'Error', 'Ha ocurrido un error al procesar la transacción');
     }
 }

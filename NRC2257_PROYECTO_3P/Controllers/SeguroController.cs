@@ -30,5 +30,10 @@ namespace NRC2257_PROYECTO_3P.Controllers
         {
             return SeguroBL.CalcularCostoSeguro(vehiculoId, dias, tipo);
         }
+
+        public int Guardar(SeguroCLS seguro)
+        {
+            return SeguroBL.Guardar(seguro);
+        }
     }
 }
