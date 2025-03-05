@@ -83,7 +83,7 @@ namespace DataLayer
                 cmd.Parameters.AddWithValue("@vehiculoid", reserva.VehiculoId);
                 cmd.Parameters.AddWithValue("@fechainicio", reserva.FechaInicio);
                 cmd.Parameters.AddWithValue("@fechafin", reserva.FechaFin);
-                res = cmd.ExecuteNonQuery();
+                res = Convert.ToInt32(cmd.ExecuteScalar());
             });
             return res;
         }

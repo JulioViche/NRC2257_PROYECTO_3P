@@ -31,6 +31,11 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return ClienteBL.Recuperar(id);
         }
 
+        public int RecuperarId(string email)
+        {
+            return ClienteBL.RecuperarId(email);
+        }
+
         public int Guardar(ClienteCLS cliente)
         {
             return ClienteBL.Guardar(cliente);
