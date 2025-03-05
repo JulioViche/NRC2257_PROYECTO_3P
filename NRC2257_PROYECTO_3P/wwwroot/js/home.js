@@ -215,6 +215,21 @@ function procesarSeguro() {
 //    $('#payment-modal').modal('hide');
 //    swalAlert('success', undefined, '¡Reserva completada con éxito!');
 //}
+
+function swalLoading(message) {
+    Swal.fire({
+        title: message || 'Procesando...',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+}
+
+
 async function procesarPago() {
     try {
         // Show loading indicator
