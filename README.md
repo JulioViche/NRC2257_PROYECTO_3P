@@ -35,7 +35,10 @@ El proyecto usa **SQL Server** con las siguientes tablas principales:
 
 ### 📜 Creación y Estructura de la Base de Datos
 
-Revisa el [.bak]()
+- [Código SQL inicial](doc/database.md#código-sql-inicial)
+- [Modelo endidad relación](doc/database.md#modelo-entidad-relación)
+- También puedes acceder al [.bak](doc/AlquilerVehiculos_autobackup_625945_2025-03-03T10-17-00.BAK)
+- O acceder al [.sql](doc/database.sql)
 
 ## 🎨 Interfaz
 La interfaz está desarrollada con Bootstrap para mejorar la experiencia del usuario. Se han implementado modos claro y oscuro.
