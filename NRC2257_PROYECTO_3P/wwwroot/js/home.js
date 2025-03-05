@@ -23,13 +23,8 @@ prevCardBtn.addEventListener('click', () => {
     cardCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
 });
 
-//Btn banner Alquilar
-function registerButtonClick() {
-    alert('¡Botón de registro clickeado!');
 
-}
-
-//
+//Para listar los vehiculos en el form de reservas
 function renderVehiculoOptions() {
     let vehiculoInput = document.getElementById('vehiculo-input');
 
@@ -52,5 +47,52 @@ function renderVehiculoOptions() {
     });
 }
 
-// Llamar a la función cuando la página carga
-document.addEventListener('DOMContentLoaded', renderVehiculoOptions);
+    // Llamar a la función cuando la página carga
+    document.addEventListener('DOMContentLoaded', renderVehiculoOptions);
+
+
+//RECUPERAR EMAIL para el formulario de reserva
+function recuperarEmail() {
+    const email = document.getElementById('Email').value;
+
+    if (!email) {
+        alert('Por favor, ingrese un correo electrónico');
+        return;
+    }
+
+    // Realizar el fetch para recuperar el ID del cliente
+    fetchGet(`Cliente/RecuperarId?email=${encodeURIComponent(email)}`, 'json', res => {
+        if (res > 0) {
+            // Cliente ya existe
+            swalAlert('error', undefined, 'El cliente con este email ya está registrado')
+         
+        } else {
+            // Proceder con el registro de nuevo cliente
+            alert('Registrar nuevo cliente');
+            $('#register-modal').modal('show');
+        }
+    });
+}
+
+
+//RECOMENDACIONES
+document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    let currentSlide = 0;
+    
+    function nextSlide() {
+        // Oculta el slide actual
+        slides[currentSlide].classList.add('hidden');
+
+        // Avanza al siguiente slide
+        currentSlide = (currentSlide + 1) % slides.length;
+
+        // Muestra el nuevo slide
+        slides[currentSlide].classList.remove('hidden');
+    }
+
+    // Cambia de slide cada 5 segundos
+    setInterval(nextSlide, 5000);
+});
+
+
