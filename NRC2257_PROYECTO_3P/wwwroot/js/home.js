@@ -198,23 +198,103 @@ function procesarSeguro() {
 
 
 
-// Procesar pago
-function procesarPago() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    const reservationData = JSON.parse(localStorage.getItem('reservationData'));
-    const seguroData = JSON.parse(localStorage.getItem('seguroData'));
+//// Procesar pago
+//function procesarPago() {
+//    const userData = JSON.parse(localStorage.getItem('userData'));
+//    const reservationData = JSON.parse(localStorage.getItem('reservationData'));
+//    const seguroData = JSON.parse(localStorage.getItem('seguroData'));
 
-    // Aquí puedes implementar la lógica de pago
-    // Una vez completado el pago, limpiar localStorage
+//    // Aquí puedes implementar la lógica de pago
+//    // Una vez completado el pago, limpiar localStorage
 
-    localStorage.removeItem('userData');
-    localStorage.removeItem('reservationData');
-    localStorage.removeItem('seguroData');
+//    localStorage.removeItem('userData');
+//    localStorage.removeItem('reservationData');
+//    localStorage.removeItem('seguroData');
 
-    $('#payment-modal').modal('hide');
-    swalAlert('success', undefined, '¡Reserva completada con éxito!');
+//    $('#payment-modal').modal('hide');
+//    swalAlert('success', undefined, '¡Reserva completada con éxito!');
+//}
+async function procesarPago() {
+    try {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        const reservationData = JSON.parse(localStorage.getItem('reservationData'));
+        const seguroData = JSON.parse(localStorage.getItem('seguroData'));
+        const metodoPago = document.getElementById('metodo-pago').value;
+
+        // 1. Save Cliente first to get the ID
+        const clienteForm = new FormData();
+        clienteForm.append('Id', 0);
+        clienteForm.append('Nombre', userData.Nombre);
+        clienteForm.append('Apellido', userData.Apellido);
+        clienteForm.append('Telefono', userData.Telefono);
+        clienteForm.append('Email', userData.Email);
+
+        const clienteId = await new Promise((resolve, reject) => {
+            fetchPost('Cliente/guardar', 'text', clienteForm, res => {
+                resolve(parseInt(res));
+            });
+        });
+
+        if (!clienteId) throw new Error('Error creating client');
+
+        // 2. Create Reserva with the new ClienteId
+        const reservaForm = new FormData();
+        reservaForm.append('Id', 0);
+        reservaForm.append('ClienteId', clienteId);
+        reservaForm.append('VehiculoId', reservationData.VehiculoId);
+        reservaForm.append('FechaInicio', reservationData['fecha-inicial']);
+        reservaForm.append('FechaFin', reservationData['fecha-final']);
+
+        const reservaId = await new Promise((resolve, reject) => {
+            fetchPost('Reserva/guardar', 'text', reservaForm, res => {
+                resolve(parseInt(res));
+            });
+        });
+
+        if (!reservaId) throw new Error('Error creating reservation');
+
+        // 3. Create Seguro with ReservaId
+        const seguroForm = new FormData();
+        seguroForm.append('ReservaId', reservaId);
+        seguroForm.append('TipoSeguro', seguroData.tipo);
+        seguroForm.append('Costo', parseFloat(seguroData.costo.replace('$', '')));
+
+        const seguroId = await new Promise((resolve, reject) => {
+            fetchPost('Seguro/guardar', 'text', seguroForm, res => {
+                resolve(parseInt(res));
+            });
+        });
+
+        if (!seguroId) throw new Error('Error creating insurance');
+
+        // 4. Create Pago with ReservaId
+        const pagoForm = new FormData();
+        pagoForm.append('ReservaId', reservaId);
+        pagoForm.append('MetodoPago', metodoPago);
+        pagoForm.append('Monto', parseFloat(seguroData.costo.replace('$', '')));
+        pagoForm.append('FechaPago', new Date().toISOString());
+
+        const pagoId = await new Promise((resolve, reject) => {
+            fetchPost('Pago/guardar', 'text', pagoForm, res => {
+                resolve(parseInt(res));
+            });
+        });
+
+        if (!pagoId) throw new Error('Error creating payment');
+
+        // Clear localStorage after successful transaction
+        localStorage.removeItem('userData');
+        localStorage.removeItem('reservationData');
+        localStorage.removeItem('seguroData');
+
+        $('#payment-modal').modal('hide');
+        swalAlert('success', undefined, '¡Reserva completada con éxito!');
+
+    } catch (error) {
+        console.error('Error in transaction:', error);
+        swalAlert('error', 'Error', 'Ha ocurrido un error al procesar la transacción');
+    }
 }
-
 
 
 

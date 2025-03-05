@@ -59,5 +59,21 @@ namespace DataLayer
             });
             return seguro;
         }
+
+        public static int Guardar(SeguroCLS seguro)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("uspGuardarSeguro", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ReservaId", seguro.ReservaId);
+                cmd.Parameters.AddWithValue("@TipoSeguro", seguro.TipoSeguro);
+                cmd.Parameters.AddWithValue("@Costo", seguro.Costo);
+                res = Convert.ToInt32(cmd.ExecuteScalar());
+            });
+            return res;
+        }
+
+
     }
 }

@@ -24,33 +24,6 @@
     </div>
 
 
-<!-------------------------------------- FORMULARIO DE REGISTRO BASICO -------------------------------------------------->
-<div id="email-modal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-label">Validación de Email</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" class="row">
-                    <!-- Mensaje de error (mostrar solo si hay error) -->
-                    <div id="error-message" class="alert alert-danger d-none" role="alert">
-                        Mensaje de error de ejemplo.
-                    </div>
-                    <!-- Campo de correo electrónico -->
-                    <div class="col-12 mb-2">
-                        <label for="Email" class="col-form-label">Email:</label>
-                        <input type="email" id="Email" name="Email" required class="form-control" placeholder="ejemplo@correo.com">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary w-100" onclick="recuperarEmail()">Registrarse</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
  <!-- Separador / Espacio entre secciones -----------------------------------------------------------  BANNER  ------------------------------------------------------------------------------------------>
@@ -107,6 +80,37 @@
             <text x="1050" y="60" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="black" text-anchor="middle">Alquilar »</text>
         </g>
     </svg>
+</div>
+
+
+
+
+<!-------------------------------------- FORMULARIO DE REGISTRO BASICO -------------------------------------------------->
+<div id="email-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-label">Validación de Email</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" class="row">
+                    <!-- Mensaje de error (mostrar solo si hay error) -->
+                    <div id="error-message" class="alert alert-danger d-none" role="alert">
+                        Mensaje de error de ejemplo.
+                    </div>
+                    <!-- Campo de correo electrónico -->
+                    <div class="col-12 mb-2">
+                        <label for="Email" class="col-form-label">Email:</label>
+                        <input type="email" id="Email" name="Email" required class="form-control" placeholder="ejemplo@correo.com">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary w-100" onclick="recuperarEmail()">Registrarse</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

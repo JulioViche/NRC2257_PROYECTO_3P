@@ -15,5 +15,10 @@ namespace NRC2257_PROYECTO_3P.Controllers
         {
             return PagoBL.Listar();
         }
+
+        public int Guardar(PagoCLS pago)
+        {
+            return PagoBL.Guardar(pago);
+        }
     }
 }
