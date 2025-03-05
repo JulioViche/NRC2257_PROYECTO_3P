@@ -53,25 +53,45 @@ function renderVehiculoOptions() {
 
 //RECUPERAR EMAIL para el formulario de reserva
 function recuperarEmail() {
-    const email = document.getElementById('Email').value;
+    const email = document.getElementById('Email').value.trim();
 
     if (!email) {
+
         alert('Por favor, ingrese un correo electrónico');
         return;
     }
 
-    // Realizar el fetch para recuperar el ID del cliente
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+        alert('Por favor, ingrese un correo electrónico válido');
+        return;
+    }
+
     fetchGet(`Cliente/RecuperarId?email=${encodeURIComponent(email)}`, 'json', res => {
         if (res > 0) {
 
-            swalAlert('error', undefined, 'El cliente con este email ya está registrado')
-         
+            swalAlert('error', undefined, 'El cliente con este email ya está registrado');
         } else {
-
             $('#register-modal').modal('show');
+            document.getElementById('email-input').value = email;
         }
     });
 }
+
+// Optional: Add real-time validation and error display
+document.getElementById('Email').addEventListener('input', function () {
+    const email = this.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const errorMessageElement = document.getElementById('error-message');
+
+    if (email && !emailRegex.test(email)) {
+        errorMessageElement.textContent = 'Por favor, ingrese un correo electrónico válido';
+        errorMessageElement.classList.remove('d-none');
+    } else {
+        errorMessageElement.classList.add('d-none');
+    }
+});
 
 function save() {
  
