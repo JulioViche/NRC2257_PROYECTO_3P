@@ -25,5 +25,10 @@ namespace NRC2257_PROYECTO_3P.Controllers
         {
             return ReservaBL.Recuperar(id);
         }
+
+        public int Guardar(ReservaCLS reserva)
+        {
+            return ReservaBL.Guardar(reserva);
+        }
     }
 }

@@ -19,5 +19,10 @@ namespace BusinessLayer
         {
             return ReservaDAL.Recuperar(id);
         }
+
+        public static int Guardar(ReservaCLS reserva)
+        {
+            return ReservaDAL.Guardar(reserva);
+        }
     }
 }

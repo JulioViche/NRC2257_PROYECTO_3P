@@ -71,5 +71,21 @@ namespace DataLayer
             });
             return reserva;
         }
+
+        public static int Guardar(ReservaCLS reserva)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("spGuardarReserva", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", reserva.Id);
+                cmd.Parameters.AddWithValue("@clienteid", reserva.ClienteId);
+                cmd.Parameters.AddWithValue("@vehiculoid", reserva.VehiculoId);
+                cmd.Parameters.AddWithValue("@fechainicio", reserva.FechaInicio);
+                cmd.Parameters.AddWithValue("@fechafin", reserva.FechaFin);
+                res = cmd.ExecuteNonQuery();
+            });
+            return res;
+        }
     }
 }

@@ -35,39 +35,67 @@ function navbarActive(id) {
     });
 }
 
+function createOperationButton(title, bscolor, faicon, callback) {
+    const btn = document.createElement('a');
+    btn.setAttribute('title', title);
+    btn.classList.add('px-2', bscolor);
+    btn.innerHTML = faicon;
+    btn.addEventListener('click', callback);
+    return btn;
+}
+
 // Columna de operaciones de AG Grid (Editar, Eliminar)
 function operationsColumn(config) {
     return {
         headerName: '',
-        width: 75,
+        maxWidth: 125,
         resizable: false,
         cellStyle: { padding: 0 },
         sortable: false,
-        hide: !config.editable && !config.deletable,
         cellRenderer: options => {
             const container = document.createElement('div');
             container.classList.add('text-center', 'm-0', 'w-100');
 
             if (config.editable) {
-                const updateBtn = document.createElement('a');
-                updateBtn.setAttribute('title', 'Editar');
-                updateBtn.classList.add('px-2', 'text-primary');
-                updateBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
-                updateBtn.addEventListener('click', () => {
+                const updateBtn = createOperationButton('Editar', 'text-primary', '<i class="fa-solid fa-pen-to-square"></i>', () => {
                     update(options.data.id);
                 });
                 container.appendChild(updateBtn);
             }
 
             if (config.deletable) {
-                const removeBtn = document.createElement('a');
-                removeBtn.setAttribute('title', 'Eliminar');
-                removeBtn.classList.add('px-2', 'text-danger');
-                removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-                removeBtn.addEventListener('click', () => {
+                const removeBtn = createOperationButton('Eliminar', 'text-danger', '<i class="fa-solid fa-trash-can"></i>', () => {
                     remove(options.data.id, options.node.rowIndex);
                 });
                 container.appendChild(removeBtn);
+            }
+
+            if (config.createSeguro) {
+                const seguroBtn = createOperationButton('Añadir seguro', 'text-primary', '<i class="fa-solid fa-lock"></i>', () => {
+                    createSeguro(options.data.id);
+                });
+                container.appendChild(seguroBtn);
+            }
+
+            if (config.createPago) {
+                const pagoBtn = createOperationButton('Añadir pago', 'text-primary', '<i class="fa-solid fa-wallet"></i>', () => {
+                    createSeguro(options.data.id);
+                });
+                container.appendChild(pagoBtn);
+            }
+
+            if (config.finalizable) {
+                const finalizeBtn = createOperationButton('Finalizar', 'text-success', '<i class="fa-solid fa-check"></i>', () => {
+                    finalize(options.data.id);
+                });
+                container.appendChild(finalizeBtn);
+            }
+
+            if (config.cancelable) {
+                const cancelBtn = createOperationButton('Cancelar', 'text-danger', '<i class="fa-solid fa-ban"></i>', () => {
+                    cancel(options.data.id);
+                });
+                container.appendChild(cancelBtn);
             }
 
             return container;
@@ -130,7 +158,8 @@ async function fetchGet(url, type, callback) {
         callback(res);
 
     } catch (error) {
-        alert(error);
+        swalAlert('error', 'Ups...', 'Ha ocurrido algo al tratar de recibir los datos.');
+        toastr.error(error, 'ERROR');
     }
 }
 
@@ -148,7 +177,8 @@ async function fetchPost(url, type, form, callback) {
 
         callback(res);
     } catch (error) {
-        alert(error);
+        swalAlert('error', 'Ups...', 'Ha ocurrido algo al tratar de enviar los datos.');
+        toastr.error(error, 'ERROR');
     }
 }
 

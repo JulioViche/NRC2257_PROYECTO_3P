@@ -30,13 +30,26 @@
                     </div>
                     <div class="col-6 mb-2">
                         <label class="col-form-label mb-0">Fecha inicial:</label>
-                        <input id="fecha-inicio-input" class="form-control" name="fechaInicio" type="date" min="" required>
+                        <input id="fecha-inicio-input" class="form-control" name="FechaInicio" type="date" min="" required>
                     </div>
                     <div class="col-6 mb-2">
                         <label class="col-form-label mb-0">Fecha final:</label>
-                        <input id="fecha-fin-input" class="form-control" name="fechaFin" type="date" required>
+                        <input id="fecha-fin-input" class="form-control" name="FechaFin" type="date" required>
                     </div>
                 </form>
+
+                <hr>
+
+                @*<form id="seguro-modal-form" method="post" class="row">
+                    <div class="col-12 mb-2">
+                        <input id="reserva-input" class="form-select" name="ReservaId" type="text" required hidden>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label class="col-form-label mb-0">Tipo de seguro:</label>
+                        <select id="seguro-input" class="form-select" name="TipoSeguro" required></select>
+                    </div>
+                </form>*@
+
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary w-100" onclick="save()">Guardar</button>

@@ -27,8 +27,8 @@ namespace DataLayer
                     seguro.ReservaId = reader.GetInt32(ReservaIdOrdinal);
                     seguro.Cliente = reader.GetString(ClienteOrdinal);
                     seguro.Vehiculo = reader.GetString(VehiculoOrdinal);
-                    seguro.FechaInicio = reader.GetDateTime(FechaInicioOrdinal).ToString();
-                    seguro.FechaFin = reader.GetDateTime(FechaFinOrdinal).ToString();
+                    seguro.ReservaFechaInicio = reader.GetDateTime(FechaInicioOrdinal).ToString();
+                    seguro.ReservaFechaFin = reader.GetDateTime(FechaFinOrdinal).ToString();
                     seguro.TipoSeguro = reader.GetString(TipoSeguroOrdinal);
                     seguro.Costo = (float)reader.GetDecimal(CostoOrdinal);
                     lista.Add(seguro);

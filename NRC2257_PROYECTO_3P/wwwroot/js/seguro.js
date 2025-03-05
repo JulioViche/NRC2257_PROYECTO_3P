@@ -1,36 +1,85 @@
 ﻿navbarActive('#seguroIndex');
 
-window.onload = () => {
-    renderTable();
-}
-
-let config = {
-    headers: ['#', 'ReservaID', 'Cliente', 'Vehículo', 'Fecha Inicio', 'Fecha Fin', 'Tipo Seguro', 'Costo'],
-    properties: ['id', 'reservaid', 'cliente', 'vehiculo', 'fechainicio', 'fechafin', 'tiposeguro', 'costo'],
-    editable: true
+const gridOptions = {
+    pagination: true,
+    paginationPageSize: 10,
+    paginationPageSizeSelector: [10, 20, 50, 100],
+    columnDefs: [
+        {
+            headerName: 'ID',
+            field: 'id',
+            width: 75,
+            resizable: false,
+            sort: "asc",
+        },
+        {
+            headerName: 'ReservaID',
+            field: 'reservaId',
+            width: 100,
+            resizable: false,
+            hide: true
+        },
+        {
+            headerName: 'Cliente',
+            field: 'cliente',
+            minWidth: 100,
+            flex: 1,
+            filter: true
+        },
+        {
+            headerName: 'Vehículo',
+            field: 'vehiculo',
+            minWidth: 100,
+            flex: 1,
+            filter: true
+        },
+        dateColumn({
+            headerName: 'Fecha inicial',
+            field: 'reservaFechaInicio'
+        }),
+        dateColumn({
+            headerName: 'Fecha final',
+            field: 'reservaFechaFin'
+        }),
+        {
+            headerName: 'Tipo de Seguro',
+            field: 'tipoSeguro',
+            width: 125,
+            resizable: false
+        },
+        {
+            headerName: 'Costo',
+            field: 'costo',
+            width: 125,
+            resizable: false
+        },
+        operationsColumn({
+            editable: false,
+            deletable: false
+        })
+    ],
+    onGridReady: options => {
+        window.gridApi = options.api;
+        renderGrid();
+    },
+    onFirstDataRendered: () => {
+        const rows = document.querySelectorAll('.ag-row');
+        rows.forEach(row => {
+            row.classList.add('fadeIn');
+        });
+    }
 };
 
-async function renderTable() {
-    if (getValue('email-input') === '' && getValue('name-input') === '') {
-        config.url = 'Seguro/listar';
-        config.method = 'get';
-        createTable(config);
-    }
-    else {
-        //let form = new FormData(document.getElementById('search-form'));
-        //console.log(form);
-        //config.url = 'Cliente/Filter';
-        // Cliente/Create
-        //config.method = 'post';
-        //createTable(config, form);
-    }
-}
+const gridDiv = document.getElementById('datagrid');
+const grid = agGrid.createGrid(gridDiv, gridOptions);
 
-function search() {
-    resetForm();
-    renderTable();
-}
-
-function resetForm() {
-    document.getElementById('search-form').reset();
+function renderGrid() {
+    //if (!getValue('global-filter'))
+        fetchGet('Seguro/listar', 'json', res => {
+            window.gridApi.updateGridOptions({ rowData: res });
+        });
+    //else
+    //    fetchGet('Reserva/filtrar?filtro=' + getValue('global-filter'), 'json', res => {
+    //        window.gridApi.updateGridOptions({ rowData: res });
+    //    });
 }

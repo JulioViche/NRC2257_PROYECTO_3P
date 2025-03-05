@@ -55,8 +55,10 @@ const gridOptions = {
             resizable: false
         },
         operationsColumn({
-            editable: false,
-            deletable: false
+            createSeguro: true,
+            createPago: true,
+            finalizable: true,
+            cancelable: true
         })
     ],
     onGridReady: options => {
@@ -91,7 +93,7 @@ function renderGrid() {
         });
 }
 
-async function renderClienteOptions() {
+function renderClienteOptions() {
     let clienteInput = document.getElementById('cliente-input');
     let url = getValue('cliente-filter') ? 'Cliente/filtrar?filtro=' + getValue('cliente-filter') : 'Cliente/listar';
     let text = getValue('cliente-filter') ? '' : '<option value="0">Selecciona un cliente</option>';
@@ -106,9 +108,9 @@ async function renderClienteOptions() {
     });
 }
 
-async function renderVehiculoOptions() {
+function renderVehiculoOptions() {
     let vehiculoInput = document.getElementById('vehiculo-input');
-    let url = getValue('vehiculo-filter') ? 'Vehiculo/filtrar?filtro=' + getValue('vehiculo-filter') : 'Vehiculo/listar';
+    let url = getValue('vehiculo-filter') ? 'Vehiculo/filtrar?filtro=Disponible ' + getValue('vehiculo-filter') : 'Vehiculo/listar';
     let text = getValue('vehiculo-filter') ? '' : '<option value="0">Selecciona un vehículo</option>';
     fetchGet(url, 'json', res => {
         vehiculoInput.innerHTML = text;
@@ -121,6 +123,19 @@ async function renderVehiculoOptions() {
     });
 }
 
+//function renderTipoSeguro() {
+//    let seguroInput = document.getElementById('seguro-input');
+//    fetchGet('Seguro/listarTiposSeguro', 'json', res => {
+//        seguroInput.innerHTML = '<option value = "">Ninguno</option>';
+//        for (let obj of res) {
+//            let option = document.createElement('option');
+//            option.value = obj;
+//            option.textContent = obj;
+//            seguroInput.appendChild(option);
+//        }
+//    });
+//}
+
 function create() {
     document.getElementById('modal-form').reset();
     setValue('id-input', 0);
@@ -131,34 +146,22 @@ function create() {
     renderVehiculoOptions();
 }
 
-async function update(id) {
-    fetchGet('Cliente/recuperar?id=' + id, 'json', res => {
-        setValue('id-input', res.id);
-        setValue('cliente-input', res.clienteId);
-        setValue('vehiculo-input', res.vehiculoId);
-        setValue('fecha-inicio-input', res.fechaInicio);
-        setValue('fecha-fin-input', res.fechaFin);
+function save() {
+    const form = new FormData(document.getElementById('modal-form'));
+    fetchPost('Reserva/guardar', 'text', form, res => {
+        if (parseInt(res)) {
+            $('#save-modal').modal('hide');
+            renderGrid();
+            toastr.success('', 'Cambios guardados con éxito.');
+        } else {
+            swalAlert('error', 'Ups...', 'Algo ha salido mal');
+            toastr.error('Error al guardar en la base de datos', 'ERROR');
+        }
     });
-    document.getElementById('modal-label').textContent = 'Editar Reserva';
-    document.getElementById('modal-id-group').style.display = 'block';
-    $('#save-modal').modal('show');
 }
 
-async function save() {
-    const form = new FormData(document.getElementById('modal-form'));
-    form.forEach((value, key) => {
-        console.log(`${key}: ${value}`);
-    });
-    //fetchPost('Cliente/guardar', 'text', form, res => {
-    //    if (parseInt(res)) {
-    //        $('#save-modal').modal('hide');
-    //        renderGrid();
-    //        toastr.success('', 'Cambios guardados con éxito.');
-    //    } else {
-    //        swalAlert('error', 'Ups...', 'Algo ha salido mal');
-    //        toastr.error('Error al guardar en la base de datos', 'ERROR');
-    //    }
-    //});
+function createSeguro(id) {
+
 }
 
 function resetGlobalFilter() {
