@@ -44,19 +44,15 @@ const gridOptions = {
         {
             headerName: 'Tipo de Seguro',
             field: 'tipoSeguro',
-            width: 125,
+            width: 150,
             resizable: false
         },
         {
             headerName: 'Costo',
             field: 'costo',
-            width: 125,
+            width: 100,
             resizable: false
-        },
-        operationsColumn({
-            editable: false,
-            deletable: false
-        })
+        }
     ],
     onGridReady: options => {
         window.gridApi = options.api;
