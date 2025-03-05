@@ -25,19 +25,19 @@ namespace BusinessLayer
             switch (tipo)
             {
                 case "Responsabilidad Civil Básico":
-                    porcentaje = 0.33f;
+                    porcentaje = 0.033f;
                     break;
                 case "Responsabilidad Civil":
-                    porcentaje = 0.50f;
+                    porcentaje = 0.050f;
                     break;
                 case "Contra Robos":
-                    porcentaje = 0.75f;
+                    porcentaje = 0.075f;
                     break;
                 case "Cobertura Total":
-                    porcentaje = 1.25f;
+                    porcentaje = 0.125f;
                     break;
                 default:
-                    porcentaje = 0.01f;
+                    porcentaje = 0.001f;
                     break;
             }
 

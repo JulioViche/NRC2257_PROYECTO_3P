@@ -28,3 +28,29 @@ function registerButtonClick() {
     alert('¡Botón de registro clickeado!');
 
 }
+
+//
+function renderVehiculoOptions() {
+    let vehiculoInput = document.getElementById('vehiculo-input');
+
+    // Always use the base list URL
+    let url = 'Vehiculo/listar';
+
+    // Add default "Select a vehicle" option
+    vehiculoInput.innerHTML = '<option value="0">Selecciona un vehículo</option>';
+
+    fetchGet(url, 'json', res => {
+        // Add vehicles to the select
+        for (let obj of res) {
+            let option = document.createElement('option');
+            option.value = obj.id;
+            option.textContent = `${obj.marca} ${obj.modelo} (${obj.año})`;
+            vehiculoInput.appendChild(option);
+        }
+    }, error => {
+        console.error('Error al cargar vehículos:', error);
+    });
+}
+
+// Llamar a la función cuando la página carga
+document.addEventListener('DOMContentLoaded', renderVehiculoOptions);
