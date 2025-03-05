@@ -21,9 +21,14 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return SeguroBL.Listar();
         }
 
-        public float CalcularCostoSeguro(int reservaId, string tipo)
+        //public float CalcularCostoSeguro(int reservaId, string tipo)
+        //{
+        //    return SeguroBL.CalcularCostoSeguro(reservaId, tipo);
+        //}
+
+        public float CalcularCostoSeguro(int vehiculoId, int dias, string tipo)
         {
-            return SeguroBL.CalcularCostoSeguro(reservaId, tipo);
+            return SeguroBL.CalcularCostoSeguro(vehiculoId, dias, tipo);
         }
     }
 }

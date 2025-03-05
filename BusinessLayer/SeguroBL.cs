@@ -15,11 +15,39 @@ namespace BusinessLayer
             return ["Responsabilidad Civil Básico", "Responsabilidad Civil", "Contra Robos", "Cobertura Total"];
         }
 
-        public static float CalcularCostoSeguro(int reservaId, string tipo)
+        //public static float CalcularCostoSeguro(int reservaId, string tipo)
+        //{
+        //    ReservaCLS reserva = ReservaDAL.Recuperar(reservaId);
+        //    VehiculoCLS vehiculo = VehiculoDAL.Recuperar(reserva.VehiculoId);
+        //    TimeSpan timeSpan = (DateTime.Parse(reserva.FechaFin) - DateTime.Parse(reserva.FechaInicio));
+        //    float porcentaje = 0;
+
+        //    switch (tipo)
+        //    {
+        //        case "Responsabilidad Civil Básico":
+        //            porcentaje = 0.033f;
+        //            break;
+        //        case "Responsabilidad Civil":
+        //            porcentaje = 0.050f;
+        //            break;
+        //        case "Contra Robos":
+        //            porcentaje = 0.075f;
+        //            break;
+        //        case "Cobertura Total":
+        //            porcentaje = 0.125f;
+        //            break;
+        //        default:
+        //            porcentaje = 0.001f;
+        //            break;
+        //    }
+
+        //    return vehiculo.Precio * timeSpan.Days * porcentaje;
+        //}
+
+
+        public static float CalcularCostoSeguro(int vehiculoId, int dias, string tipo)
         {
-            ReservaCLS reserva = ReservaDAL.Recuperar(reservaId);
-            VehiculoCLS vehiculo = VehiculoDAL.Recuperar(reserva.VehiculoId);
-            TimeSpan timeSpan = (DateTime.Parse(reserva.FechaFin) - DateTime.Parse(reserva.FechaInicio));
+            VehiculoCLS vehiculo = VehiculoDAL.Recuperar(vehiculoId);
             float porcentaje = 0;
 
             switch (tipo)
@@ -41,7 +69,8 @@ namespace BusinessLayer
                     break;
             }
 
-            return vehiculo.Precio * timeSpan.Days * porcentaje;
+            return vehiculo.Precio * dias * porcentaje;
         }
+
     }
 }
