@@ -28,8 +28,8 @@ namespace DataLayer
                     pago.ReservaId = reader.GetInt32(ReservaIdOrdinal);
                     pago.Cliente = reader.GetString(ClienteOrdinal);
                     pago.Vehiculo = reader.GetString(VehiculoOrdinal);
-                    pago.FechaInicio = reader.GetDateTime(FechaInicioOrdinal).ToString();
-                    pago.FechaFin = reader.GetDateTime(FechaFinOrdinal).ToString();
+                    pago.ReservaFechaInicio = reader.GetDateTime(FechaInicioOrdinal).ToString();
+                    pago.ReservaFechaFin = reader.GetDateTime(FechaFinOrdinal).ToString();
                     pago.FechaPago = reader.GetDateTime(FechaPagoOrdinal).ToString();
                     pago.Monto = (float)reader.GetDecimal(MontoOrdinal);
                     pago.MetodoPago = reader.GetString(MetodoPagoOrdinal);

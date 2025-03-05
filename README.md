@@ -4,7 +4,7 @@ Este proyecto es una aplicación web desarrollada en **ASP.NET Core MVC** para g
 
 El sistema se encuentra desplegado en Sommee.com: https://www.nrc2257.somee.com/
 
-## 📋 Requisitos Previos
+## 📋 Herramientas Utilizadas
 
 Este proyecto fue realizado con las siguientes herramientas:
 
@@ -33,7 +33,7 @@ El proyecto usa **SQL Server** con las siguientes tablas principales:
 - Pagos 💰
 - Seguros 🛡
 
-### 📜 Creación de la Base de Datos
+### 📜 Creación y Estructura de la Base de Datos
 
 Revisa el [.bak]()
 

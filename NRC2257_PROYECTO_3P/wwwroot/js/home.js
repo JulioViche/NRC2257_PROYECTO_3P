@@ -1,4 +1,5 @@
 ﻿navbarActive('#homeIndex');
+document.body.classList.add('home-body');
 
 function scrollToImage(carouselId, imageIndex) {
     const carousel = document.getElementById(carouselId);

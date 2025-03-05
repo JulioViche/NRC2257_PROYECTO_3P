@@ -39,12 +39,13 @@ function createOperationButton(title, bscolor, faicon, callback) {
     const btn = document.createElement('a');
     btn.setAttribute('title', title);
     btn.classList.add('px-2', bscolor);
+    btn.style.cursor = 'pointer';
     btn.innerHTML = faicon;
     btn.addEventListener('click', callback);
     return btn;
 }
 
-// Columna de operaciones de AG Grid (Editar, Eliminar)
+// Columna de operaciones de AG Grid (Editar, Eliminar, Finalizar, Cancelar, Asegurar, Pago)
 function operationsColumn(config) {
     return {
         headerName: '',
@@ -70,32 +71,56 @@ function operationsColumn(config) {
                 container.appendChild(removeBtn);
             }
 
+            if (config.finalizable) {
+                let finalizeBtn
+                if (options.data.estado == 'Atrasada') {
+                    finalizeBtn = createOperationButton('Finalizar', 'text-secondary', '<i class="fa-solid fa-check"></i>', () => {
+                        finalize(options.data.id);
+                    });
+                } else if (options.data.estado == 'Confirmada' || options.data.estado == 'En curso') {
+                    finalizeBtn = createOperationButton('', 'text-transparent', '<i class="fa-solid fa-check"></i>', () => { });
+                    finalizeBtn.style.cursor = 'default';
+                } else {
+                    finalizeBtn = createOperationButton('Finalizada', 'text-success', '<i class="fa-solid fa-check"></i>', () => { });
+                    finalizeBtn.style.cursor = 'default';
+                }
+                container.appendChild(finalizeBtn);
+            }
+
+            if (config.cancelable) {
+                let cancelBtn
+                if (options.data.estado == 'Confirmada' || options.data.estado == 'Pendiente') {
+                    cancelBtn = createOperationButton('Cancelar', 'text-secondary', '<i class="fa-solid fa-ban"></i>', () => {
+                        cancel(options.data.id);
+                    });
+                } else if (options.data.estado == 'Cancelada') {
+                    cancelBtn = createOperationButton('Cancelado', 'text-secondary', '<i class="fa-solid fa-ban"></i>', () => { });
+                    cancelBtn.style.cursor = 'default';
+                } else {
+                    cancelBtn = createOperationButton('', 'text-transparent', '<i class="fa-solid fa-ban"></i>', () => { });
+                    cancelBtn.style.cursor = 'default';
+                }
+                container.appendChild(cancelBtn);
+            }
+
             if (config.createSeguro) {
-                const seguroBtn = createOperationButton('Añadir seguro', 'text-primary', '<i class="fa-solid fa-lock"></i>', () => {
+                const seguroBtn = createOperationButton('Asegurar', 'text-secondary', '<i class="fa-solid fa-lock"></i>', () => {
                     createSeguro(options.data.id);
                 });
                 container.appendChild(seguroBtn);
             }
 
             if (config.createPago) {
-                const pagoBtn = createOperationButton('Añadir pago', 'text-primary', '<i class="fa-solid fa-wallet"></i>', () => {
-                    createSeguro(options.data.id);
-                });
+                let pagoBtn;
+                if (options.data.estado == 'Pendiente') {
+                    pagoBtn = createOperationButton('Añadir pago', 'text-secondary', '<i class="fa-solid fa-wallet"></i>', () => {
+                        createPago(options.data.id);
+                    });
+                } else {
+                    pagoBtn = createOperationButton('Pagada', 'text-warning', '<i class="fa-solid fa-wallet"></i>', () => {});
+                    pagoBtn.style.cursor = 'default';
+                }
                 container.appendChild(pagoBtn);
-            }
-
-            if (config.finalizable) {
-                const finalizeBtn = createOperationButton('Finalizar', 'text-success', '<i class="fa-solid fa-check"></i>', () => {
-                    finalize(options.data.id);
-                });
-                container.appendChild(finalizeBtn);
-            }
-
-            if (config.cancelable) {
-                const cancelBtn = createOperationButton('Cancelar', 'text-danger', '<i class="fa-solid fa-ban"></i>', () => {
-                    cancel(options.data.id);
-                });
-                container.appendChild(cancelBtn);
             }
 
             return container;
