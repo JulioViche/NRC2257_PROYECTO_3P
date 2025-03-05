@@ -161,7 +161,6 @@ function save() {
     let reservaForm = new FormData(document.getElementById('modal-form'));
     fetchPost('Reserva/guardar', 'text', reservaForm, res => {
         if (parseInt(res)) {
-            console.log(parseInt(res))
             saveSeguro(parseInt(res));
             savePago(parseInt(res));
             $('#save-modal').modal('hide');
@@ -185,10 +184,9 @@ function saveSeguro(id) {
 function savePago(id) {
     let pagoForm = new FormData(document.getElementById('pago-modal-form'));
     pagoForm.set('Id', 0);
-    pagoForm.set('FechaPago', new Date().toISOString().split('T')[0]);
     pagoForm.set('Monto', 200);
     pagoForm.set('ReservaId', id);
-    fetchPost('Pago/guardar', 'text', pagoForm, res => { });
+    fetchPost('Pago/guardar', 'text', pagoForm, res => {});
 }
 
 function mostrarSeguro() {

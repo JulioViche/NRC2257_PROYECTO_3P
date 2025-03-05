@@ -63,13 +63,14 @@ namespace DataLayer
         public static int Guardar(SeguroCLS seguro)
         {
             int res = 0;
-            DBConnection.ExecuteQuery("uspGuardarSeguro", (cmd) =>
+            DBConnection.ExecuteQuery("spGuardarSeguro", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@ReservaId", seguro.ReservaId);
-                cmd.Parameters.AddWithValue("@TipoSeguro", seguro.TipoSeguro);
-                cmd.Parameters.AddWithValue("@Costo", seguro.Costo);
-                res = Convert.ToInt32(cmd.ExecuteScalar());
+                cmd.Parameters.AddWithValue("@id", seguro.Id);
+                cmd.Parameters.AddWithValue("@reservaid", seguro.ReservaId);
+                cmd.Parameters.AddWithValue("@tiposeguro", seguro.TipoSeguro);
+                cmd.Parameters.AddWithValue("@costo", seguro.Costo);
+                res = cmd.ExecuteNonQuery();
             });
             return res;
         }
