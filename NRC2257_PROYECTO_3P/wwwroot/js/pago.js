@@ -103,6 +103,7 @@ function update(id) {
         setValue('reservaId-input', res.reservaId);
         setValue('metodoPago-input', res.metodoPago);
         setValue('monto-input', res.monto);
+        $('#save-modal').modal('show');
     });
     document.getElementById('modal-label').textContent = 'Editar Pago';
     document.getElementById('modal-id-group').style.display = 'block';
@@ -133,17 +134,15 @@ function save() {
 
 function remove(id, rowIndex) {
     const rowNode = window.gridApi.getRowNode(rowIndex);
-    const cliente = rowNode ? rowNode.data.cliente : 'este pago';
+    const nombre = rowNode ? rowNode.data.cliente : 'este pago';
 
-    swalConfirmDelete('warning', '¿Está seguro de eliminar el registro de ' + cliente + '?', () => {
+    swalConfirmDelete('warning', '¿Está seguro de eliminar el pago de ' + nombre + '?', () => {
         fetchGet('Pago/eliminar?id=' + id, 'text', res => {
             if (parseInt(res)) {
                 renderGrid();
-                swalAlert('success', 'Eliminado', 'El registro ha sido eliminado');
-                toastr.success('El registro ha sido eliminado', 'Eliminado');
+                swalAlert('success', 'Eliminado', 'El pago ha sido eliminado');
             } else {
-                swalAlert('error', 'Ups...', 'Algo ha salido mal');
-                toastr.error('Error al eliminar en la base de datos', 'ERROR');
+                swalAlert('error', 'Error', 'No se pudo eliminar el pago');
             }
         });
     });

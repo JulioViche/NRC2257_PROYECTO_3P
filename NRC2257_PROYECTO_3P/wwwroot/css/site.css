@@ -51,6 +51,7 @@ html.dark body {
 .container {
     max-width: 1200px;
     padding: 1rem;
+    transition: margin-left 0.3s ease;
 }
 
 .content-card {
@@ -94,7 +95,13 @@ html:not(.dark) footer {
     border-radius: 0.75rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     margin: 1rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, width 0.3s ease, transform 0.3s ease;
+}
+
+#accordian.nav-collapsed {
+    width: 0;
+    transform: translateX(-100%);
+    overflow: hidden;
 }
 
 #accordian li {
@@ -261,4 +268,39 @@ hr {
     color: var(--text-color);
     background-color: var(--card-bg);
     border-color: var(--border-color);
+}
+
+/* Estilos para el navbar toggleable */
+#accordian {
+    transition: width 0.3s ease, transform 0.3s ease;
+    width: 200px;
+}
+
+#accordian.nav-collapsed {
+    width: 0;
+    transform: translateX(-100%);
+    overflow: hidden;
+}
+
+.container {
+    transition: margin-left 0.3s ease;
+}
+
+.content-shifted {
+    margin-left: 200px;
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+    #accordian {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+    }
+    
+    .content-shifted {
+        margin-left: 0;
+    }
 }

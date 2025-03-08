@@ -18,22 +18,29 @@
 
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
     <header>
-
-        
-        <div class="container mx-auto p-4">
-            <button id="theme-toggle" class="bg-blue-500 dark:bg-blue-700 text-white p-3 rounded-full shadow hover:shadow-lg transition duration-300">
-                <!-- Icono de sol (visible en modo oscuro) -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-                <!-- Icono de luna (visible en modo claro) -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
+        <div class="container mx-auto p-4 flex justify-between items-center">
+            <!-- Botón para toggle del navbar -->
+            <button id="navbar-toggle" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
             </button>
+            
+            <!-- Botón de tema movido a la derecha -->
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="bg-blue-500 dark:bg-blue-700 text-white p-3 rounded-full shadow hover:shadow-lg transition duration-300">
+                    <!-- Icono de sol (visible en modo oscuro) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <!-- Icono de luna (visible en modo claro) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 block dark:hidden" fill="none" viewBox="0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
         </div>
         
-        <div id="accordian"> 
+        <!-- Agregar clase collapsed al accordian -->
+        <div id="accordian" class="nav-collapsed"> 
             <ul class="show-dropdown main-navbar">
                 <div class="selector-active">
                     <div class="top"></div>
@@ -93,6 +100,17 @@
     <script src="~/js/generic.js"></script>
     <script src="~/js/login-validacion.js"></script>
 
+    <!-- Agregar script al final del body -->
+    <script>
+        document.getElementById('navbar-toggle').addEventListener('click', function() {
+            const accordian = document.getElementById('accordian');
+            accordian.classList.toggle('nav-collapsed');
+            
+            // Ajustar el contenido principal
+            const mainContent = document.querySelector('.container');
+            mainContent.classList.toggle('content-shifted');
+        });
+    </script>
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>
