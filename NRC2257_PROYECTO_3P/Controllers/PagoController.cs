@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NRC2257_PROYECTO_3P.Controllers
 {
-    public class PagoController : Controller
+    public class PagoController : AdminController
     {
         public IActionResult Index()
         {

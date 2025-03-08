@@ -4,7 +4,7 @@ using NRC2257_PROYECTO_3P.Models;
 
 namespace NRC2257_PROYECTO_3P.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AdminController
     {
         private readonly ILogger<HomeController> _logger;
 

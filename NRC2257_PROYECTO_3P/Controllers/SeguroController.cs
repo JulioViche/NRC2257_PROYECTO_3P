@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NRC2257_PROYECTO_3P.Controllers
 {
-    public class SeguroController : Controller
+    public class SeguroController : AdminController
     {
         public IActionResult Index()
         {

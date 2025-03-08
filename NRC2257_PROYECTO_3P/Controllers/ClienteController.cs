@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NRC2257_PROYECTO_3P.Controllers
 {
-    public class ClienteController : Controller
+    public class ClienteController : AdminController
     {
         public IActionResult Index()
         {

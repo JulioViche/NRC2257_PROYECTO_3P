@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NRC2257_PROYECTO_3P.Controllers
 {
-    public class ReservaController : Controller
+    public class ReservaController : AdminController
     {
         public IActionResult Index()
         {
