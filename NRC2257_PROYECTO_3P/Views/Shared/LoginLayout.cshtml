@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"]</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="~/js/login-validacion.js"></script>
+    <style>
+        /* Definimos la clase para el contenedor semi-transparente */
+        .bg-translucent {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(3px);
+        }
+    </style>
 </head>
 <body class="h-screen flex items-center bg-cover bg-center"
       style="background-image: url('https://images.unsplash.com/photo-1566274360936-69fae8dc1d95?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D%3D');">
-
-    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md ml-16">
+    <!-- Cambiamos bg-white por bg-translucent para hacerlo semi-transparente -->
+    <div class="w-full max-w-md bg-translucent p-8 rounded-lg shadow-md ml-16">
         @RenderBody()
     </div>
-
 </body>
 </html>
