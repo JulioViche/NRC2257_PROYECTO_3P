@@ -3,7 +3,61 @@
     ViewData["Title"] = "Registro de Pagos";
 }
 
-@* <h1>Registro de Pagos</h1> *@
+<div id="save-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-label" class="modal-title">o</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form" method="post" class="row">
+                    <div id="modal-id-group" class="col-2 mb-2">
+                        <label class="col-form-label mb-0">Id:</label>
+                        <input id="id-input" class="form-control" name="Id" type="text" placeholder="?" contenteditable="false" required readonly>
+                    </div>
+                    <div class="col-10 mb-2">
+                        <label class="col-form-label mb-0">ReservaId:</label>
+                        <input id="email-input" class="form-control" name="ReservaId" type="email" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Cliente:</label>
+                        <input id="nombre-input" class="form-control" name="Cliente" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Vehículo:</label>
+                        <input id="apellido-input" class="form-control" name="Vehiculo" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Fecha de Inicio de la Reserva:</label>
+                        <input id="cargo-input" class="form-control" name="ReservaFechaInicio" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Fecha Final de la Reseva:</label>
+                        <input id="telefono-input" class="form-control" name="ReservaFechaFin" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Monto:</label>
+                        <input id="telefono-input" class="form-control" name="Monto" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Método de Pago:</label>
+                        <input id="telefono-input" class="form-control" name="MetodoPago" type="text" required>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <label class="col-form-label mb-0">Fecha de Pago:</label>
+                        <input id="telefono-input" class="form-control" name="FechaPago" type="text" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary w-100" onclick="save()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1>Registro de Pagos</h1> 
 
 <fieldset class="row mt-3">
     <form id="global-filter-form" method="post" class="col-md-9 col-12 row">
@@ -14,6 +68,9 @@
     <div class="col row">
         <div class="col-6 mb-2">
             <button class="btn btn-danger w-100" onclick="resetGlobalFilter()">Limpiar</button>
+        </div>
+        <div class="col-6 mb-2">
+            <button class="btn btn-success w-100" onclick="create()">Nuevo</button>
         </div>
     </div>
 </fieldset>

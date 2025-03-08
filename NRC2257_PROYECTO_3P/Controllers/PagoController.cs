@@ -20,5 +20,22 @@ namespace NRC2257_PROYECTO_3P.Controllers
         {
             return PagoBL.Guardar(pago);
         }
+
+        public PagoCLS Recuperar(int id)
+        {
+            return PagoBL.Recuperar(id);
+        }
+
+        public int Actualizar(PagoCLS pago)
+        {
+            return PagoBL.Actualizar(pago);
+        }
+
+        public int Eliminar(int id)
+        {
+            return PagoBL.Eliminar(id);
+        }
+
+
     }
 }

@@ -48,3 +48,29 @@
     border: 2px solid #00FFFF; /* Azul neón al tener foco */
     box-shadow: 0 0 15px #00FFFF; /* Azul neón con resplandor */
 }
+
+/*h1 web site efect*/
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.typing-effect {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 4px solid #0ea5e9; /* Cursor */
+    animation: typing 3s steps(12, end) infinite alternate, blink 0.7s infinite;
+}
+

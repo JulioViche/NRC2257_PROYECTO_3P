@@ -77,6 +77,34 @@ namespace DataLayer
             return res;
         }
 
+        public static int Eliminar(int id)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("spEliminarPago", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                res = cmd.ExecuteNonQuery();
+            });
+            return res;
+        }
+
+        public static int Actualizar(PagoCLS pago)
+        {
+            int res = 0;
+            DBConnection.ExecuteQuery("spGuardarPago", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", pago.Id);
+                cmd.Parameters.AddWithValue("@reservaid", pago.ReservaId);
+                cmd.Parameters.AddWithValue("@metodopago", pago.MetodoPago);
+                cmd.Parameters.AddWithValue("@monto", pago.Monto);
+                res = cmd.ExecuteNonQuery();
+            });
+            return res;
+        }
+
+
 
     }
 }
