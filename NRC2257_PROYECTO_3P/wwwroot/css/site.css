@@ -78,6 +78,12 @@ html:not(.dark) footer {
     color: #4b5563;
 }
 
+main {
+    flex-grow: 1;
+    padding: 1.5rem;
+    transition: padding 0.3s ease;
+}
+
 /* Navbar y Accordian */
 .main-navbar {
     position: relative;
@@ -193,7 +199,6 @@ html:not(.dark) footer {
 
 
 /* Datagrid */
-
 hr {
     color: var(--text-color);
 }

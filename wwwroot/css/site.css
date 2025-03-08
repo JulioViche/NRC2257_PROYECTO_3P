@@ -78,6 +78,12 @@ html:not(.dark) footer {
     color: #4b5563;
 }
 
+
+main {
+    flex-grow: 1;
+    padding: 1.5rem;
+    transition: padding 0.3s ease;
+}
 /* Navbar y Accordian */
 .main-navbar {
     position: relative;
@@ -326,4 +332,15 @@ hr {
 
 #theme-toggle:hover {
     transform: scale(1.1);
+}
+
+.login-page {
+    background-image: url('https://images.unsplash.com/photo-1566274360936-69fae8dc1d95?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
