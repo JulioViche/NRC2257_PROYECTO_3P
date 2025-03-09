@@ -92,7 +92,7 @@ function renderGrid() {
             window.gridApi.updateGridOptions({ rowData: res });
         });
     else
-        fetchGet('Pago/listar?filtro=' + getValue('global-filter'), 'json', res => {
+        fetchGet('Pago/filtrar?filtro=' + getValue('global-filter'), 'json', res => {
             window.gridApi.updateGridOptions({ rowData: res });
         });
 }

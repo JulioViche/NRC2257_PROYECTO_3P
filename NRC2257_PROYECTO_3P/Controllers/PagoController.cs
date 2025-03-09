@@ -16,6 +16,12 @@ namespace NRC2257_PROYECTO_3P.Controllers
             return PagoBL.Listar();
         }
 
+        public List<PagoCLS> Filtrar(string filtro)
+        {
+            return PagoBL.Filtrar(filtro);
+        }
+
+
         public int Guardar(PagoCLS pago)
         {
             return PagoBL.Guardar(pago);

@@ -50,6 +50,18 @@ namespace DataLayer
             return lista;
         }
 
+        public static List<PagoCLS> Filtrar(string filtro)
+        {
+            List<PagoCLS> lista = new();
+            DBConnection.ExecuteQuery("spFiltrarPagos", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@filtro", filtro);
+                lista = Leer(cmd.ExecuteReader());
+            });
+            return lista;
+        }
+
         public static PagoCLS Recuperar(int id)
         {
             PagoCLS pago = null;

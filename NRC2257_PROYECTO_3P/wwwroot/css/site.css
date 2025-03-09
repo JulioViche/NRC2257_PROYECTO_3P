@@ -27,8 +27,8 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%; 
-    overflow-x: hidden; 
+    height: 100%;
+    overflow-x: hidden;
 }
 
 /* Estilos generales */
@@ -38,10 +38,12 @@ body {
     min-height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
     display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .home-body header {
-    height: 2000px;
+    height: auto;
 }
 
 html.dark body {
@@ -50,7 +52,9 @@ html.dark body {
 
 .container {
     max-width: 1200px;
-    padding: 1rem;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
     transition: margin-left 0.3s ease;
 }
 
@@ -80,94 +84,118 @@ html:not(.dark) footer {
 
 main {
     flex-grow: 1;
-    padding: 2rem;
-    transition: padding 0.3s ease;
+    padding: 1rem;
+    transition: padding-left 0.3s ease;
+    width: 100%;
 }
+
+    main.with-nav {
+        padding-left: 200px;
+    }
 
 /* Navbar y Accordian */
 .main-navbar {
     position: relative;
 }
 
+#navbar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 30;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+    #navbar-toggle i {
+        font-size: 24px;
+        color: white;
+        color: var(--nav-accent);
+    }
+
 #accordian {
-    position: sticky;
-    top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: var(--nav-bg);
     width: 200px;
-    padding: 0 0 10px 0;
-    height: 400px;
+    padding: 70px 0 10px 0;
+    height: 100vh;
     overflow-x: hidden;
     flex-grow: 1;
-    border-radius: 0.75rem;
+    border-radius: 0;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    margin: 1rem;
-    transition: background-color 0.3s ease, width 0.3s ease, transform 0.3s ease;
+    margin: 0;
+    z-index: 15;
+    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
 }
 
-#accordian.nav-collapsed {
-    width: 0;
-    transform: translateX(-100%);
-    overflow: hidden;
-}
+    #accordian.nav-collapsed {
+        width: 0;
+        transform: translateX(-100%);
+        overflow: hidden;
+    }
 
-#accordian li {
-    list-style-type: none;
-}
+    #accordian li {
+        list-style-type: none;
+    }
 
-#accordian ul li {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 45px;
-    display: block;
-    padding: 0 20px;
-    position: relative;
-    transition: all 0.5s ease;
-    width: 100%;
-    border-left: 3px outset transparent;
-}
+    #accordian ul li {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 15px;
+        line-height: 45px;
+        display: block;
+        padding: 0 20px;
+        position: relative;
+        transition: all 0.5s ease;
+        width: 100%;
+        border-left: 3px outset transparent;
+    }
 
-#accordian ul li a i {
-    margin: 0 10px;
-}
+        #accordian ul li a i {
+            margin: 0 10px;
+        }
 
-#accordian ul li:hover {
-    background-color: var(--nav-accent);
-    border-left-color: var(--accent-color);
-}
+        #accordian ul li:hover {
+            background-color: var(--nav-accent);
+            border-left-color: var(--accent-color);
+        }
 
-#accordian ul li.active {
-    background: var(--text-color);
-    border-left-color: var(--text-color);
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
+        #accordian ul li.active {
+            background: var(--text-color);
+            border-left-color: var(--text-color);
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
 
-#accordian ul li.active:hover {
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-}
+            #accordian ul li.active:hover {
+                border-top-left-radius: 50px;
+                border-bottom-left-radius: 50px;
+            }
 
-#accordian > ul > li.active > a {
-    color: var(--nav-accent);
-    background-color: transparent;
-}
+    #accordian > ul > li.active > a {
+        color: var(--nav-accent);
+        background-color: transparent;
+    }
 
-#accordian a:not(:only-child):after {
-    content: "\f105";
-    position: absolute;
-    right: 20px;
-    top: 10%;
-    font-size: 14px;
-    display: inline-block;
-    padding-right: 3px;
-    vertical-align: middle;
-    font-weight: 900;
-}
+    #accordian a:not(:only-child):after {
+        content: "\f105";
+        position: absolute;
+        right: 20px;
+        top: 10%;
+        font-size: 14px;
+        display: inline-block;
+        padding-right: 3px;
+        vertical-align: middle;
+        font-weight: 900;
+    }
 
-#accordian .active > a:not(:only-child):after {
-    transform: rotate(90deg);
-}
+    #accordian .active > a:not(:only-child):after {
+        transform: rotate(90deg);
+    }
 
 .selector-active {
     width: 100%;
@@ -180,6 +208,22 @@ main {
     border-bottom-left-radius: 50px;
 }
 
+/* Banner container */
+.banner-container {
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    margin-bottom: 0;
+}
+
+/* Header positioning */
+header {
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    height: auto;
+}
+
 /* Botones y controles */
 .btn-primary {
     background-color: var(--accent-color);
@@ -187,16 +231,15 @@ main {
 }
 
 #theme-toggle {
-    position: fixed; /* Mantiene el botón en una posición fija en la pantalla */
-    top: 15px; /* Espaciado desde la parte superior */
-    right: 15px; /* Lo posiciona en la esquina derecha */
+    position: fixed;
+    top: 15px;
+    right: 15px;
     background-color: var(--accent-color);
-    padding: 10px; /* Espaciado interno para un mejor aspecto */
-    border-radius: 50%; /* Hace que sea un botón redondeado */
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2); /* Agrega una sombra para mejor visibilidad */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
-
 
 /* Datagrid */
 hr {
@@ -269,11 +312,11 @@ hr {
     background-color: var(--nav-bg);
 }
 
-.modal-content input, .modal-content select {
-    color: var(--text-color);
-    background-color: var(--card-bg);
-    border-color: var(--border-color);
-}
+    .modal-content input, .modal-content select {
+        color: var(--text-color);
+        background-color: var(--card-bg);
+        border-color: var(--border-color);
+    }
 
 .form-control {
     color: var(--text-color);
@@ -281,39 +324,14 @@ hr {
     border-color: var(--border-color);
 }
 
-/* Estilos para el navbar toggleable */
-#accordian {
-    transition: width 0.3s ease, transform 0.3s ease;
-    width: 200px;
-}
-
-#accordian.nav-collapsed {
-    width: 0;
-    transform: translateX(-100%);
-    overflow: hidden;
-}
-
-.container {
-    transition: margin-left 0.3s ease;
-    margin-top: 2rem;
-}
-
-.content-shifted {
-    margin-left: 200px;
-}
-
 /* Ajuste responsive */
 @media (max-width: 768px) {
     #accordian {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        z-index: 1000;
+        width: 250px;
     }
-    
-    .content-shifted {
-        margin-left: 0;
+
+    main.with-nav {
+        padding-left: 0;
     }
 }
 
@@ -333,5 +351,5 @@ header {
 .banner-container {
     position: relative;
     z-index: 5;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
 }

@@ -10,6 +10,11 @@ namespace BusinessLayer
             return PagoDAL.Listar();
         }
 
+        public static List<PagoCLS> Filtrar(string filtro)
+        {
+            return PagoDAL.Filtrar(filtro);
+
+        }
 
         public static int Guardar(PagoCLS pago)
         {
