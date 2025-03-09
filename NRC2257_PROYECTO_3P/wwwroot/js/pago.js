@@ -101,8 +101,14 @@ function update(id) {
     fetchGet('Pago/recuperar?id=' + id, 'json', res => {
         setValue('id-input', res.id);
         setValue('reservaId-input', res.reservaId);
-        setValue('metodoPago-input', res.metodoPago);
+        setValue('cliente-input', res.cliente);
+        setValue('vehiculo-input', res.vehiculo);
+        setValue('reservaFechaInicio-input', res.reservaFechaInicio);
+        setValue('reservaFechaFin', res.reservaFechaFin);
         setValue('monto-input', res.monto);
+        setValue('metodoPago-input', res.metodoPago);
+        setValue('fechaPago-input', res.fechaPago); 
+        
         $('#save-modal').modal('show');
     });
     document.getElementById('modal-label').textContent = 'Editar Pago';
