@@ -295,6 +295,7 @@ hr {
 
 .container {
     transition: margin-left 0.3s ease;
+    margin-top: 2rem;
 }
 
 .content-shifted {
@@ -322,4 +323,15 @@ hr {
     background-position: center;
     height: 100vh;
     width: 100%;
+}
+
+header {
+    position: relative;
+    z-index: 10;
+}
+
+.banner-container {
+    position: relative;
+    z-index: 5;
+    margin-bottom: 2rem;
 }

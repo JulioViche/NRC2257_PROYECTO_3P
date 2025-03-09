@@ -104,7 +104,7 @@ function update(id) {
         setValue('cliente-input', res.cliente);
         setValue('vehiculo-input', res.vehiculo);
         setValue('reservaFechaInicio-input', res.reservaFechaInicio);
-        setValue('reservaFechaFin', res.reservaFechaFin);
+        setValue('reservaFechaFin-input', res.reservaFechaFin);
         setValue('monto-input', res.monto);
         setValue('metodoPago-input', res.metodoPago);
         setValue('fechaPago-input', res.fechaPago); 
