@@ -13,7 +13,7 @@ namespace DataLayer
             return new SqlConnection(root.GetConnectionString("connection"));
         }
 
-        public static void ExecuteQuery(string query, Action<SqlCommand> parameterSetup = null)
+        public static void ExecuteQuery(string query, Action<SqlCommand>? parameterSetup = null)
         {
             using (SqlConnection connection = getSqlConnection())
             {
