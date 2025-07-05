@@ -5,9 +5,9 @@ namespace DataLayer
 {
     public class ClienteDAL
     {
-        private static List<ClienteCLS> Leer(SqlDataReader reader)
+        private static List<ClienteCLS>? Leer(SqlDataReader reader)
         {
-            List<ClienteCLS> lista = null;
+            List<ClienteCLS>? lista = null;
             if (reader != null)
             {
                 lista = new List<ClienteCLS>();
@@ -31,9 +31,9 @@ namespace DataLayer
             return lista;
         }
 
-        public static List<ClienteCLS> Listar()
+        public static List<ClienteCLS>? Listar()
         {
-            List<ClienteCLS> lista = null;
+            List<ClienteCLS>? lista = null;
             DBConnection.ExecuteQuery("spListarClientes", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -42,9 +42,9 @@ namespace DataLayer
             return lista;
         }
 
-        public static List<ClienteCLS> Filtrar(string filtro)
+        public static List<ClienteCLS>? Filtrar(string filtro)
         {
-            List<ClienteCLS> lista = null;
+            List<ClienteCLS>? lista = null;
             DBConnection.ExecuteQuery("spFiltrarClientes", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -54,14 +54,14 @@ namespace DataLayer
             return lista;
         }
 
-        public static ClienteCLS Recuperar(int id)
+        public static ClienteCLS? Recuperar(int id)
         {
-            ClienteCLS cliente = null;
+            ClienteCLS? cliente = null;
             DBConnection.ExecuteQuery("spRecuperarCliente", (cmd) =>
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", id);
-                cliente = Leer(cmd.ExecuteReader())[0];
+                cliente = Leer(cmd.ExecuteReader())?[0];
             });
             return cliente;
         }
