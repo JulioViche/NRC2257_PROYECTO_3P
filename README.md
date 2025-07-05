@@ -4,6 +4,25 @@ Este proyecto es una aplicación web desarrollada en **ASP.NET Core MVC** para g
 
 El sistema se encuentra desplegado en Sommee.com: https://www.nrc2257.somee.com/
 
+## 📱 ¿Cómo usar esto en una App?
+
+¡Perfecto! Este sistema está diseñado para funcionar tanto como aplicación web como base para apps móviles:
+
+### 🚀 Opciones Disponibles:
+1. **📱 Aplicación Web Responsiva** - Funciona directamente en cualquier navegador móvil
+2. **🌐 Progressive Web App (PWA)** - Se instala como app nativa en dispositivos móviles
+3. **🔌 API REST** - Para integrar con apps móviles nativas (React Native, Flutter, etc.)
+4. **📦 App Híbrida** - Usando Cordova/PhoneGap para app stores
+
+### 📚 Documentación Completa:
+- **[📱 Guía: Cómo Usar en una App](docs/COMO-USAR-EN-APP.md)** - Documentación completa sobre todas las opciones
+- **[🔌 API Endpoints](docs/API-ENDPOINTS.md)** - Documentación técnica de la API para desarrolladores
+
+### 🎯 Acceso Rápido:
+- **Web App**: https://www.nrc2257.somee.com/
+- **Admin**: `admin@autosrent.com` / `admin123`
+- **Usuarios**: Botones de Google/Facebook
+
 ## 📋 Herramientas Utilizadas
 
 Este proyecto fue realizado con las siguientes herramientas:
